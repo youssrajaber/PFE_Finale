@@ -1,0 +1,55 @@
+.f1
+{
+    display: grid;
+    height: 83vh;
+    align-items: center;
+}
+.f1 form{
+    display: grid;
+    height: 50vh;
+    grid-template-columns: repeat(3,1fr);
+    background-color: white;
+    gap: 40px;
+    padding-block: 30px;
+    box-sizing: border-box;border-radius: 4px;
+    box-shadow: 1px 7px 20px hsl(0, 0%, 65%);
+}
+.f1 input{
+    outline: none;
+    width: 90%;
+    font-size: 1em;
+    margin: auto;
+    display: block;
+    height: 40px;
+    border: .1px solid black;
+    box-sizing: border-box;
+}
+.f1 select{
+    outline: none;
+    width: 90%;
+    font-size: 1em;
+    margin: auto;
+    display: block;
+    height: 40px;
+    background-color: white;
+    border-radius: 0px;
+    border: .1px solid black;
+}
+.f1 label{
+    width: 90%;
+    font-size: 1em;
+    margin: auto;
+    display: block;
+    margin-block: 10px;
+    text-align: start;
+}
+.f1 button{
+    height: 40px;
+    width: 90%;
+    font-size: 1em;
+    margin: auto;
+    color: white;
+    background-color: #1882fc;
+    border: none;
+    cursor: pointer;
+}
