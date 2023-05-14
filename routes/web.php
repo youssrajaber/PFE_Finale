@@ -35,7 +35,7 @@ Route::get('/products/create', [HomeController::class, 'create'])->name('create'
 Route::post('/products/store', [HomeController::class, 'store'])->name('store');
 //show More
 Route::get('/products/{id}', [HomeController::class, 'show'])->name('product')->where('id', '\d+');
-// /d+ dicimal (+ 1) 
+// /d+ dicimal (+ 1)
 
 Route::get('/loginys', [loginController::class, 'show'])->name('login.show')->middleware('guest');
 Route::post('/loginp', [loginController::class, 'login'])->name('loginp')->middleware('guest');
@@ -47,7 +47,7 @@ Route::post('/storeP', [loginController::class, 'store'])->name('login.store');
 //LOgout
 Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 
-//detail profile 
+//detail profile
 Route::get('/details/{email}/{name}', [loginController::class, 'details'])->name('details');
 
 //delete product
@@ -55,24 +55,21 @@ Route::delete('/products/{id}', [HomeController::class, 'destroy'])->name('destr
 // Update Products
 Route::get('/product/{id}', [HomeController::class, 'edit'])->name('edit');
 Route::put('/product/{id}', [HomeController::class, 'update'])->name('update');
-
-// -----------------Admin 
+// -----------------Admin
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('ADM')->middleware('adminuser');
 // AllProducts
 Route::get('/admin/products', [AdminController::class, 'AllPrd'])->name('AllPrd');
 // AllOrders
 Route::get('/admin/orders', [AdminController::class, 'AllOrder'])->name('AllOrder');
 // -------------------------
-
-
-// Panier 
+// Panier
 Route::get('/cart', [cartController::class, 'show']);
 Route::get('/cart/addCart/{id}', [cartController::class, 'store'])->name('add');
 Route::get('/cart/affish/', [cartController::class, 'affiche'])->name('affichage');
 //
 Route::get('/panier', [cartController::class, 'panier'])->name('cart');
 
-// Supprimer  panier 
+// Supprimer  panier
 
 Route::delete('/cart/deleteItem/{id}/{quantite}', [cartController::class, 'deleteItem'])->name('deleteItem');
 Route::put('/cart/updateItem/', [cartController::class, 'updateItem'])->name('updateItem');
