@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('components.Home');
-// });
+Route::get('/tets', function () {
+    return view('Testt.Tst');
+});
 Route::get('/gogle', function () {
     return redirect()->away('https://www.google.com');
 })->name('roton');

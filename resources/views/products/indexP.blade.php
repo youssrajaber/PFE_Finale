@@ -7,5 +7,6 @@
         <x-productcard :prd="$prd"/>
         @endforeach
     </div>
+    
     {{$productss->links()}}
 </x-master>

@@ -8,11 +8,11 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>ElectroCity</title>
     <link rel="icon" href="{{ asset('images/Logo.png') }}">
-    {{-- <link rel="stylesheet" href="css/style.css"> --}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 </head>
 
-<body>
+<body> 
     <x-Menu />
     <div class="container my-5">
         <div class="row my-3">
