@@ -8,7 +8,6 @@
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-
             </div>
         </form>
         <!-- Navbar-->
@@ -69,26 +68,81 @@
             </nav>
         </div>
         <div id="layoutSidenav_content">
+
             <main>
                 <div class="container px-4">
                     <h1 class="mt-4">Profile Details</h1>
-                    <div class="text-center">
-                        <div>
-                            <h2>{{ $name }}</h2>
-                        </div>
-                        <div>
+                    <form action="{{ route('editProfile') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('Put')
+                        <div class="text-center">
                             <div>
-                                @foreach ($image as $image)
-                                    <img class="img-fluid w-25 rounded-circle"
-                                        src="{{ asset('images/' . $image->image) }}" alt="managment.jpg">
-                                @endforeach
+                                <input type="text" name="nom" value="{{ $name }}">
                             </div>
                             <div>
-                                <h5> Nombre de commande : {{ $count }}</h5>
+                                <div>
+                                    @foreach ($image as $image)
+                                        <img class="img-fluid w-25 rounded-circle"
+                                            src="{{ asset('images/' . $image->image) }}" alt="managment.jpg">
+                                    @endforeach
+                                    <input type="file" name="image">
+                                </div>
+                                <div>
+                                    <h5> Nombre de commande :{{ $count }}</h5>
+                                </div>
+                                <h2>
+                                    <input type="text" name="email" value="{{ $email }}">
+                                    <input type="text" name="tele" value="{{ auth()->user()->Telephone }}">
+                                    <input type="text" name="addres" value="{{ auth()->user()->Adress }}">
+                                </h2>
+                                <button>Save</button>
                             </div>
-                            <h2>{{ $email }}</h2>
                         </div>
-                    </div>
+                    </form>
+                    @if (!empty($historiques))
+                        <table class="table">
+                            <tr>
+                                <th>Image</th>
+                                <th>nom</th>
+                                <th>quantite</th>
+                                <th>prix</th>
+                                <th>Total</th>
+                            </tr>
+                            @foreach ($historiques as $allOrder)
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img class="card-img-top " style="width: 5rem"
+                                                src="{{ asset('images/' . $allOrder->image) }}" alt="photo" />
+                                        </td>
+                                        <td>
+                                            <p>{{ $allOrder->nom }}</p>
+                                        </td>
+                                        <td>
+                                            <span>{{ $allOrder->prix }}</span>
+                                        </td>
+                                        <td>
+                                            <p>{{ $allOrder->quantite }}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{ $allOrder->prix * $allOrder->quantite }}DH</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            @endforeach
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center">
+                                        <strong>Totale </strong>
+                                    </td>
+                                    <td>
+                                        <strong>{{ $totalSum }}</strong>
+                                    </td>
+                                </tr>
+
+                            </tfoot>
+                        </table>
+                    @endif
                 </div>
             </main>
         </div>

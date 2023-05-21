@@ -13,31 +13,31 @@
 </head>
 
 <body>
-    <x-Menu/>
+    <x-Menu />
     <div class="container">
         <div class="row mt-5 lg">
             <div class=" col-md-6 form">
                 <h2>Welcome Back</h2>
-                <form method="POST" action="{{route('loginp')}}">
+                <form method="POST" action="{{ route('loginp') }}">
                     @csrf
-                    <div >
-                        <input type="text" name="email"  value="{{old('email')}}" placeholder="Email">
+                    <div>
+                        <input type="text" name="email" value="{{ old('email') }}" placeholder="Email">
                         @error('email')
-                            {{$message}}
+                            {{ $message }}
                         @enderror
                     </div>
-                    <div >
-                        <input type="password" name="password" placeholder="password" >
+                    <div>
+                        <input type="password" name="password" placeholder="password">
                         @error('password')
-                        {{$message}}
-                    @enderror
+                            {{ $message }}
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-block btn-dark"  >LogIn!</button>
+                        <button class="btn btn-block btn-dark">LogIn!</button>
                     </div>
                 </form>
                 <p class="text">
-                    Don't Have account  <a  href="{{route('login.create')}}">Sign up</a> 
+                    Don't Have account <a href="{{ route('login.create') }}">Sign up</a>
                 </p>
             </div>
             <div class="col-md-6">

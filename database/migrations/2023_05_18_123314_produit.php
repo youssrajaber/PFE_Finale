@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
             $table->string("nom");
-            $table->string("prix");
+            $table->double("prix");
             $table->string("image");
-            $table->string("quantite");
+            $table->integer("quantite");
+            $table->string("Discription")->nullable();
+            $table->unsignedBigInteger('idCat');
+            $table->foreign('idCat')->references('id')->on('categories');
             $table->timestamps();
         });
     }

@@ -26,4 +26,8 @@ class commande extends Model
     {
         return $this->hasMany(cart::class);
     }
+    public function historique()
+    {
+        return $this->hasMany(historique::class);
+    }
 }

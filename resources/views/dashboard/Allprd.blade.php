@@ -1,4 +1,3 @@
-{{--  --}}
 <x-Admin_master>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
@@ -59,8 +58,16 @@
                             All Commandes
                         </a>
                         <a class="nav-link " href="{{ route('AllPrd') }}">
-
                             All Products
+                        </a>
+                        <a class="nav-link " href="{{ route('AddCat') }}">
+                            Add Category
+                        </a>
+                        <a class="nav-link " href="{{ route('messages') }}">
+                            Messages
+                        </a>
+                        <a class="nav-link " href="{{ route('clients') }}">
+                            All Clients
                         </a>
                     </div>
                 </div>
@@ -74,13 +81,13 @@
                 <div class="container px-4">
                     <h1 class="mt-4">All Products</h1>
                     <div class="table-responsive">
-
                         <table class="table table-striped align-middle text-center ">
                             <tr>
                                 <th>Image</th>
                                 <th>Nom</th>
                                 <th>Prix</th>
                                 <th>Quantite</th>
+                                <th>Description</th>
                                 <th>Actions</th>
                             </tr>
                             @foreach ($allPrd as $allPrd)
@@ -97,6 +104,9 @@
                                     </td>
                                     <td>
                                         <span>{{ $allPrd->quantite }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ $allPrd->Discription }}</span>
                                     </td>
                                     <td>
                                         <form action="{{ route('destroy', $allPrd->id) }}" method="POST">

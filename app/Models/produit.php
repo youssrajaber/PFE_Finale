@@ -12,12 +12,23 @@ class produit extends Model
         'nom',
         'prix',
         'image',
-        'quantite'
+        'quantite',
+        'Discription',
+        'idCat',
     ];
     // public function commande(){
     //     return $this->belongsTo(commande::class);
     // }
-    public function cart(){
+    public function cart()
+    {
         return $this->belongsTo(cart::class);
+    }
+    public function historique()
+    {
+        return $this->belongsTo(historique::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(category::class);
     }
 }

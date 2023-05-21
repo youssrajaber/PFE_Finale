@@ -58,8 +58,16 @@
                             All Commandes
                         </a>
                         <a class="nav-link " href="{{ route('AllPrd') }}">
-
                             All Products
+                        </a>
+                        <a class="nav-link " href="{{ route('AddCat') }}">
+                            Add Category
+                        </a>
+                        <a class="nav-link " href="{{ route('messages') }}">
+                            Messages
+                        </a>
+                        <a class="nav-link " href="{{ route('clients') }}">
+                            All Clients
                         </a>
                     </div>
                 </div>
@@ -71,45 +79,47 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container px-4">
-                    <h1 class="mt-4">All Orders</h1>
-                    <table class="table">
-                        <tr>
-                            <th>Image</th>
-                            <th>Email</th>
-                            <th>Date</th>
-                            <th>Adress</th>
-                            <th>Telephone</th>
-                            <th>Total</th>
-                            <th>Payment</th>
-                        </tr>
-                        @foreach ($allOrders as $allOrder)
-                            <tr>
-                                <td>
-                                    <img class="card-img-top " style="width: 5rem"
-                                        src="{{ asset('images/' . $allOrder->image) }}" alt="photo" />
-                                </td>
-                                <td>
-                                    <h4>{{ $allOrder->email }}</h4>
-                                </td>
+                    <h1 class="mt-4">Create Product</h1>
+                    <form action="{{ route('store') }}" method="post" enctype="multipart/form-data">
 
-                                <td>
-                                    <p>{{ $allOrder->date }}</p>
-                                </td>
-                                <td>
-                                    <span>{{ $allOrder->Adress }}</span>
-                                </td>
-                                <td>
-                                    <p>{{ $allOrder->Telephone }}</p>
-                                </td>
-                                <td>
-                                    <p>{{ $allOrder->total }}DH</p>
-                                </td>
-                                <td>
-                                    <p>{{ $allOrder->payment }}</p>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
+                        @csrf
+                        <div class="mb-3">
+                            <label for="" class="form-label">Nom</label>
+                            <input type="text" name="nom" class="form-control">
+                            @error('nom')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Prix</label>
+                            <input type="text" name="prix" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Quantite</label>
+                            <input type="text" name="Qnt" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Description</label>
+                            <input type="text" name="description" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="category_id">Category</label>
+                            <select class="form-control" name="category">
+                                <option value="">Select a Category</option>
+                                @foreach ($showAll as $category)
+                                    <option value="{{ $category->id }}">{{ $category->nom }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <input type="file" name="image">
+                        </div>
+                        <div class="d-flex">
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Ajouter</button>
+                        </div>
+                    </form>
                 </div>
             </main>
         </div>

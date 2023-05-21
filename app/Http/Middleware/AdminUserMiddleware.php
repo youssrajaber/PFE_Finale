@@ -18,20 +18,15 @@ class AdminUserMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        //  if(!$user)
-        //     {
-        //     return redirect()->route('loginys');
-        //      }
 
-
-
-        if ($user->role != User::ADMIN_ROLE) {
-            return
-                redirect()->route('products');
-
-            // dd($user);
+        if ($user) {
+            if ($user->role != User::ADMIN_ROLE) {
+                return
+                    redirect()->route('products');
+                // dd($user);
+            }
         }
-
+        redirect('loginys');
         return $next($request);
     }
 }

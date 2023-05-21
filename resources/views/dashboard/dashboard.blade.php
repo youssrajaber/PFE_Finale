@@ -1,7 +1,7 @@
 <x-Admin_master>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">ElectroCity</a>
+        <a class="navbar-brand ps-3" href="/">ElectroCity</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -58,8 +58,16 @@
                             All Commandes
                         </a>
                         <a class="nav-link " href="{{ route('AllPrd') }}">
-
                             All Products
+                        </a>
+                        <a class="nav-link " href="{{ route('AddCat') }}">
+                            Add Category
+                        </a>
+                        <a class="nav-link " href="{{ route('messages') }}">
+                            Messages
+                        </a>
+                        <a class="nav-link " href="{{ route('clients') }}">
+                            All Clients
                         </a>
                     </div>
                 </div>
@@ -124,7 +132,8 @@
                                     <i class="fas fa-chart-bar me-1"></i>
                                     Bar Chart
                                 </div>
-                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas>
+                                <div class="card-body"><canvas id="myBarChart" width="100%"
+                                        height="40"></canvas>
                                 </div>
                             </div>
                         </div>

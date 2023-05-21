@@ -61,6 +61,8 @@ class cartController extends Controller
     }
     public function affiche(Request $req)
     {
+        $count = DB::table('carts')->where('carts.idUser', '=', auth()->user()->id)->count();
+        // 
         $prod = DB::table('produits')
             ->join('carts', 'carts.idPrd', '=', 'produits.id')
             ->select('produits.id', 'produits.nom', 'produits.quantite', 'produits.prix', 'produits.image', 'carts.quantite')
@@ -82,7 +84,8 @@ class cartController extends Controller
             ->where('carts.idUser', '=', auth()->user()->id)
             ->update(['carts.totale' => $totalPrix]);
 
-        return  view('products.Cart', compact('prod', 'totalPrix'));
+
+        return  view('products.Cart', compact('prod', 'totalPrix', 'count'));
     }
     public function deleteItem($id, $quantite)
     {
@@ -109,8 +112,8 @@ class cartController extends Controller
             ->value('quantite');
 
         $newQuantite = $req->quantity;
-        if( ($quantite - $newQuantite) <0){
-            return redirect()->route('affichage')->with('success','max Quantite '.$quantite);
+        if (($quantite - $newQuantite) < 0) {
+            return redirect()->route('affichage')->with('success', 'max Quantite ' . $quantite);
         }
 
         DB::table('carts')
@@ -128,6 +131,7 @@ class cartController extends Controller
     }
     public function panier()
     {
+
         return view('products.Cart');
     }
 }

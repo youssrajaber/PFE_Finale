@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 // use App\Models\client;
+
+use App\Models\historique;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +43,7 @@ class loginController extends Controller
             'image' => $image_name,
             'role' => User::USER_ROLE,
         ]);
-        return redirect('/')->with('success', 'votre compte est bien cree' . $nom);
+        return redirect('/loginys')->with('success', 'votre compte est bien cree' . $nom);
     }
     public function show()
     {
@@ -83,8 +85,54 @@ class loginController extends Controller
             ->join('users', 'commandes.idUser', '=', 'users.id')
             ->where('users.id', auth()->user()->id)
             ->count();
+        $historiques = historique::join('produits', 'produits.id', '=', 'historiques.idPrd')
+            ->select('produits.nom', 'produits.prix', 'produits.image', 'historiques.quantite', 'historiques.totale')
+            ->where('historiques.idUser',  auth()->user()->id)
+            ->get();
+        // $totalSum = DB::table('historiques')
+        //     ->join('users', 'users.id', '=', 'historiques.idUser')
+        //     ->where('historiques.idUser', auth()->user()->id)
+        //     ->sum('historiques.totale');
+
+        $totalSum = DB::table('historiques')
+            ->join('users', 'historiques.idUser', '=', 'users.id')
+            ->where('historiques.idUser', auth()->user()->id)
+            ->sum('historiques.totale');
 
 
-        return view('login.ProfileDetails', compact('email', 'name', 'image', 'count'));
+        if (auth()->user()->role === 'ADMIN') {
+            return view('login.ProfileDetails', compact('email', 'name', 'image', 'count', 'historiques', 'totalSum'));
+        } else {
+            return view('login.UserDetails', compact('email', 'name', 'image', 'count', 'historiques'));
+        }
+    }
+
+    public function editProfile(Request $req)
+    {
+        $user = User::find(auth()->user()->id);
+
+        $nom = $req->nom;
+        $email = $req->email;
+        $tele = $req->tele;
+        $addres = $req->addres;
+        $img = $req->image;
+        $image_name = $user->image;
+
+
+        if ($req->has('image')) {
+            $extension = $img->getClientOriginalName();
+            $image_name = time() . '_' . $extension;
+            $img->move(public_path('images'), $image_name);
+        }
+
+        $user->update([
+            'name' => $nom,
+            'email' => $email,
+            'Adress' => $addres,
+            'Telephone' => $tele,
+            'image' => $image_name,
+
+        ]);
+        return  back()->with('success', 'profile updated');
     }
 }

@@ -1,7 +1,7 @@
 <x-Admin_master>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">ElectroCity</a>
+        <a class="navbar-brand ps-3" href="/">ElectroCity</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -58,8 +58,16 @@
                             All Commandes
                         </a>
                         <a class="nav-link " href="{{ route('AllPrd') }}">
-
                             All Products
+                        </a>
+                        <a class="nav-link " href="{{ route('AddCat') }}">
+                            Add Category
+                        </a>
+                        <a class="nav-link " href="{{ route('messages') }}">
+                            Messages
+                        </a>
+                        <a class="nav-link " href="{{ route('clients') }}">
+                            All Clients
                         </a>
                     </div>
                 </div>
@@ -70,35 +78,36 @@
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container px-4">
-                    <h1 class="mt-4">Create Product</h1>
-                    <form action="{{ route('store') }}" method="post" enctype="multipart/form-data">
-
-                        @csrf
-                        <div class="mb-3">
-                            <label for="" class="form-label">Nom</label>
-                            <input type="text" name="nom" class="form-control">
-                            @error('nom')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Prix</label>
-                            <input type="text" name="prix" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Quantite</label>
-                            <input type="text" name="Qnt" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <input type="file" name="image">
-                        </div>
-                        <div class="d-flex">
-                            <button type="submit" class="btn btn-primary btn-block mt-2">Ajouter</button>
-                        </div>
-                    </form>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Clients</h1>
+                    <table class="table table-dark">
+                        <tr>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>Adress</th>
+                            <th>image</th>
+                            <th>role</th>
+                            <th>Action</th>
+                        </tr>
+                        @foreach ($clients as $client)
+                            <tr>
+                                <td>{{ $client->name }}</td>
+                                <td>{{ $client->email }}</td>
+                                <td>{{ $client->Adress }}</td>
+                                <td>
+                                    <div class="my-2">
+                                        <img style="width: 5rem;height: 5rem" class="img-fluid rounded-circle"
+                                            src="{{ asset('images/' . $client->image) }}" alt="">
+                                    </div>
+                                </td>
+                                <td>{{ $client->role }}</td>
+                                <td>
+                                    <a class="btn btn-danger" href="{{ route('clientsDelete', $client->id) }}">
+                                        Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
                 </div>
             </main>
         </div>
