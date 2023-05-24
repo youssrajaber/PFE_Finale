@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/tets', function () {
-//     return view('Testt.Tst');
-// });
+Route::get('/test', function () {
+    return view('components.nav');
+});
 Route::get('/gogle', function () {
     return redirect()->away('https://www.google.com');
 })->name('roton');
@@ -30,9 +30,9 @@ Route::get('/gogle', function () {
 Route::get('/cat', [PaymentContoller::class, 'generatePDF']);
 
 Route::get('/', [HomeController::class, 'index'])->name('products');
-// add Products
-Route::get('/products/create', [HomeController::class, 'create'])->name('create');
-Route::post('/products/store', [HomeController::class, 'store'])->name('store');
+// // add Products
+// Route::get('/products/create', [HomeController::class, 'create'])->name('create');
+// Route::post('/products/store', [HomeController::class, 'store'])->name('store');
 //show More
 Route::get('/products/{id}', [HomeController::class, 'show'])->name('product')->where('id', '\d+');
 // /d+ dicimal (+ 1)
@@ -61,7 +61,9 @@ Route::get('/product/{id}', [HomeController::class, 'edit'])->name('edit');
 Route::put('/product/{id}', [HomeController::class, 'update'])->name('update');
 // --------------------------------Admin----------------------------------------
 Route::middleware(['adminuser'])->group(function () {
-
+    // add Products
+    Route::get('/products/create', [HomeController::class, 'create'])->name('create');
+    Route::post('/products/store', [HomeController::class, 'store'])->name('store');
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('ADM');
     // AllProducts
     Route::get('/admin/products', [AdminController::class, 'AllPrd'])->name('AllPrd');
@@ -84,6 +86,7 @@ Route::middleware(['adminuser'])->group(function () {
 Route::get('/cart', [cartController::class, 'show']);
 Route::get('/cart/addCart/{id}', [cartController::class, 'store'])->name('add');
 Route::get('/cart/affish/', [cartController::class, 'affiche'])->name('affichage');
+// Route::get('/cart/Menu/', [cartController::class, 'Menu'])->name('Menu');
 //
 Route::get('/panier', [cartController::class, 'panier'])->name('cart');
 

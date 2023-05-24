@@ -10,10 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class cartController extends Controller
 {
-    public function show()
-    {
-        return view('products.Panier');
-    }
+
     public function store($id)
     {
         $userid = auth()->user()->id;
@@ -58,6 +55,7 @@ class cartController extends Controller
                 ->update(['quantite' =>  $quantitePrd - 1]);
         }
         return redirect()->route('affichage')->with('success', 'votre produit est bien ajouter');
+        // return redirect()->route('products')->with('success', 'votre produit est bien ajouter');
     }
     public function affiche(Request $req)
     {
@@ -87,6 +85,8 @@ class cartController extends Controller
 
         return  view('products.Cart', compact('prod', 'totalPrix', 'count'));
     }
+    
+
     public function deleteItem($id, $quantite)
     {
 
@@ -131,7 +131,6 @@ class cartController extends Controller
     }
     public function panier()
     {
-
         return view('products.Cart');
     }
 }

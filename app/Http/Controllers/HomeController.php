@@ -24,9 +24,33 @@ class HomeController extends Controller
     }
     public function index()
     {
+        $count = DB::table('carts')->where('carts.idUser', '=', auth()->user()->id)->count();
+        // 
+        $prod = DB::table('produits')
+            ->join('carts', 'carts.idPrd', '=', 'produits.id')
+            ->select('produits.id', 'produits.nom', 'produits.quantite', 'produits.prix', 'produits.image', 'carts.quantite')
+            ->where('carts.idUser', '=', auth()->user()->id)
+            ->get();
+        $getTotal = DB::table('produits')
+            ->join('carts', 'produits.id', '=', 'carts.idPrd')
+            ->select('produits.prix', 'carts.quantite')
+            ->where('carts.idUser', '=', auth()->user()->id)
+            ->get();
+        $totalPrix = (int)'carts.quantite';
+        foreach ($getTotal as $item) {
+            $prix = $item->prix;
+            $quantity = $item->quantite;
+            $totalPrix += $prix * $quantity;
+        };
+        DB::table('carts')
+            ->join('produits', 'produits.id', '=', 'carts.idPrd')
+            ->where('carts.idUser', '=', auth()->user()->id)
+            ->update(['carts.totale' => $totalPrix]);
+
         $productss = produit::paginate(4);
         $categories = categories::all();
-        return view('products.indexP', compact('productss', 'categories'));
+        return view('products.indexP', compact('productss', 'categories', 'prod', 'totalPrix', 'count'));
+
     }
     public function home()
     {
@@ -132,18 +156,18 @@ class HomeController extends Controller
         return  redirect()->back();
     }
 
-    public function search(Request $request)
-    {
+    // public function search(Request $request)
+    // {
 
 
-        $keyword = $request->input('keyword');
+    //     $keyword = $request->input('keyword');
 
-        $resulta = DB::table('produits')->where('nom', 'LIKE', '%' . $keyword . '%')
-            // ->orWhere('Discription', 'LIKE', '%' . $keyword . '%')
-            ->get();
-        // dd($resulta);
+    //     $resulta = DB::table('produits')->where('nom', 'LIKE', '%' . $keyword . '%')
+    //         // ->orWhere('Discription', 'LIKE', '%' . $keyword . '%')
+    //         ->get();
+    //     // dd($resulta);
 
 
-        return view('products.search', compact('resulta'));
-    }
+    //     return view('products.search', compact('resulta'));
+    // }
 }
