@@ -82,7 +82,7 @@ class cartController extends Controller
             ->where('carts.idUser', '=', auth()->user()->id)
             ->update(['carts.totale' => $totalPrix]);
 
-
+        
         return  view('products.Cart', compact('prod', 'totalPrix', 'count'));
     }
     

@@ -7,6 +7,7 @@ use App\Models\contact;
 use App\Models\produit;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -22,36 +23,55 @@ class HomeController extends Controller
         //specifie ->except(['home']) kolxi khadam b login ela home
         //
     }
+    public function Menu()
+    {
+        //         
+        if (Auth::user()) {
+            $prod = DB::table('produits')
+                ->join('carts', 'carts.idPrd', '=', 'produits.id')
+                ->select('produits.id', 'produits.nom', 'produits.quantite', 'produits.prix', 'produits.image', 'carts.quantite')
+                ->where('carts.idUser', '=', auth()->user()->id)
+                ->get();
+            $getTotal = DB::table('produits')
+                ->join('carts', 'produits.id', '=', 'carts.idPrd')
+                ->select('produits.prix', 'carts.quantite')
+                ->where('carts.idUser', '=', auth()->user()->id)
+                ->get();
+            $totalPrix = (int)'carts.quantite';
+            foreach ($getTotal as $item) {
+                $prix = $item->prix;
+                $quantity = $item->quantite;
+                $totalPrix += $prix * $quantity;
+            };
+            DB::table('carts')
+                ->join('produits', 'produits.id', '=', 'carts.idPrd')
+                ->where('carts.idUser', '=', auth()->user()->id)
+                ->update(['carts.totale' => $totalPrix]);
+
+            $count = DB::table('carts')->where('carts.idUser', '=', auth()->user()->id)->count();
+        } else {
+            $prod = null;
+            $totalPrix = null;
+            $count = null;
+        }
+        // return view('components.Menu', compact('prod', 'totalPrix', 'count'));
+        return [$prod, $totalPrix, $count];
+    }
     public function index()
     {
-        $count = DB::table('carts')->where('carts.idUser', '=', auth()->user()->id)->count();
-        // 
-        $prod = DB::table('produits')
-            ->join('carts', 'carts.idPrd', '=', 'produits.id')
-            ->select('produits.id', 'produits.nom', 'produits.quantite', 'produits.prix', 'produits.image', 'carts.quantite')
-            ->where('carts.idUser', '=', auth()->user()->id)
-            ->get();
-        $getTotal = DB::table('produits')
-            ->join('carts', 'produits.id', '=', 'carts.idPrd')
-            ->select('produits.prix', 'carts.quantite')
-            ->where('carts.idUser', '=', auth()->user()->id)
-            ->get();
-        $totalPrix = (int)'carts.quantite';
-        foreach ($getTotal as $item) {
-            $prix = $item->prix;
-            $quantity = $item->quantite;
-            $totalPrix += $prix * $quantity;
-        };
-        DB::table('carts')
-            ->join('produits', 'produits.id', '=', 'carts.idPrd')
-            ->where('carts.idUser', '=', auth()->user()->id)
-            ->update(['carts.totale' => $totalPrix]);
+        $paramss = $this->Menu();
+        $prod = $paramss[0];
+        $totalPrix = $paramss[1];
+        $count = $paramss[2];
 
+        //         
         $productss = produit::paginate(4);
         $categories = categories::all();
-        return view('products.indexP', compact('productss', 'categories', 'prod', 'totalPrix', 'count'));
 
+        return view('products.indexP', compact('productss', 'categories', 'prod', 'totalPrix', 'count'));
     }
+
+
     public function home()
     {
         return view('components.Home');
@@ -98,9 +118,13 @@ class HomeController extends Controller
     }
     public function show(Request $req)
     {
+        $paramss = $this->Menu();
+        $prod = $paramss[0];
+        $totalPrix = $paramss[1];
+        $count = $paramss[2];
         $id = $req->id;
         $product = produit::findOrFail($id);
-        return  view('products.show', compact('product'));
+        return  view('products.show', compact('product', 'prod', 'totalPrix', 'count'));
     }
     public function edit($id)
     {
@@ -156,18 +180,18 @@ class HomeController extends Controller
         return  redirect()->back();
     }
 
-    // public function search(Request $request)
-    // {
+    public function showCategory($id)
+    {
+        $paramss = $this->Menu();
+        $prod = $paramss[0];
+        $totalPrix = $paramss[1];
+        $count = $paramss[2];
 
+        $categoryName = DB::table('categories')
+            ->where('id', $id)
+            ->value('nom');
 
-    //     $keyword = $request->input('keyword');
-
-    //     $resulta = DB::table('produits')->where('nom', 'LIKE', '%' . $keyword . '%')
-    //         // ->orWhere('Discription', 'LIKE', '%' . $keyword . '%')
-    //         ->get();
-    //     // dd($resulta);
-
-
-    //     return view('products.search', compact('resulta'));
-    // }
+        $categoryProducts = DB::select('Select * from produits where idCat =' . $id);
+        return view('dashboard.allCategoryProducts', compact('categoryProducts', 'categoryName', 'prod', 'totalPrix', 'count'));
+    }
 }

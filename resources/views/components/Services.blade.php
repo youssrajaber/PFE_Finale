@@ -1,4 +1,4 @@
-<x-Admin_master>
+
     <section class="service py-5" id="service">
         <div class="container ">
             <div class="row">
@@ -48,4 +48,4 @@
             </div>
         </div>
     </section>
-</x-Admin_master>
+

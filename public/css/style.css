@@ -15,7 +15,38 @@
   --white-color : #ffffff;
   --font-title:'Open Sans', sans-serif;
   --font-p: 'Roboto Slab', serif;
+  
 }
+.c{
+  background-color: #911d1d;
+}
+.bg-black{
+  background-color: var(--black-color);
+}
+.bg-grey{
+  background-color: var(--grey-color);
+}
+.bg-gold{
+  background-color: var(--golden-color);
+}
+/* dashboard */
+
+#wrapper #content-wrapper {
+  background-color: var(--black-color);
+}
+.topbar #sidebarToggleTop:hover{
+  background-color: var(--golden-color);
+  color: #000000;
+}
+.badge-danger {
+  color: var(--white-color);
+  background-color: var(--grey-color);
+}
+
+
+/* End Dashboard */
+
+/* Focus-- */
   ::selection {
     color: var(--grey-color);
     background: var(--golden-color);
@@ -26,12 +57,17 @@
   .offcanvas-body{
     padding: 0;
   }
-  .btn-close:focus{
+  .btn-close:focus ,.btn:focus{
     box-shadow: none;
   }
   textarea{
     resize: none;
 }
+.nav-link:focus{
+  color: var(--white-color);
+}
+/* ---EndFcs--- */
+
 /* Start Scroll */
 
 ::-webkit-scrollbar {
@@ -59,7 +95,7 @@
 body{
   background-color: var(--black-color);
 }
-  /* Colores */
+/* Colores */
   .white-color{
   color: var(--white-color);
   }
@@ -85,8 +121,9 @@ body{
     /* background-color: var(--golden-color); */
   }
   .paragraphe{
-    font-family: var(--font-p);
-    color: var(--golden-color);
+    /* font-family: sans-serif ; */
+    color: #545454;
+    /* color: var(--golden-color); */
   }
   /* ------------- */
   /* Start Nav */
@@ -101,19 +138,24 @@ body{
     padding: .5rem 1.9rem ;
     color: var(--white-color);
     border: 1px solid var(--golden-color);
-}
-nav.navbar .nav-btn div:hover,header .modal .modal-footer .btn ,section.contact form button:hover {
-
-  background-color: var(--golden-color);
-}
-/* btn-toggel */
-nav.navbar .bg-toggel{
+  }
+  nav.navbar .nav-btn div:hover,header .modal .modal-footer .btn ,section.contact form button:hover {
+    
+    background-color: var(--golden-color);
+  }
+  /* btn-toggel */
+  nav.navbar .bg-toggel{
   background-color: var(--golden-color);
 }
 /* end toggel */
 
   /* --End Nav---- */
 
+  /*  Start Section1 */
+  section.section1{
+    height: calc(100vh - 56px);
+  }
+  /* End Section1 */
   /* START ABOUT */
   section.About{
     height: 100vh;
@@ -198,8 +240,7 @@ nav.navbar .bg-toggel{
   
   section.Category .card-h2 {
     z-index: 1;
-    /* color: white; */
-    /* font-size: 2em; */
+
   }
   
   section.Category .card::before {
@@ -210,7 +251,8 @@ nav.navbar .bg-toggel{
     height: 130%;
     animation: rotBGimg 3s linear infinite;
     transition: all 0.2s linear;
-  }
+    -webkit-animation: rotBGimg 3s linear infinite;
+}
   
   @keyframes rotBGimg {
     from {
@@ -237,7 +279,7 @@ nav.navbar .bg-toggel{
 
   /* AllProduct */
 
-  .card {
+  .cardallprd {
     width: 100%;
     height: 100%;
     min-height: 285px;
@@ -252,7 +294,7 @@ nav.navbar .bg-toggel{
     padding-bottom: 1rem;
 }
   
-  .img {
+  .cardallprd .img {
     height: 20%;
     position: absolute;
     transition: 0.2s ease-in-out;
@@ -260,33 +302,33 @@ nav.navbar .bg-toggel{
   
   }
 
-  .textBox {
+  .cardallprd .textBox {
 
     width: 100%;
     transition: 0.2s ease-in-out;
 }
   
-  .textBox > .text {
+  .cardallprd .textBox > .text {
     font-weight: bold;
   }
   
-  .textBox > .head {
+  .cardallprd .textBox > .head {
     font-size: 20px;
   }
   
-  .textBox > .price {
+  .cardallprd .textBox > .price {
     font-size: 17px;
   }
   
-  .textBox > span {
+  .cardallprd .textBox > span {
     font-size: 12px;
     color: lightgrey;
   }
-  .card:hover > .textBox {
+  .cardallprd:hover > .textBox {
     opacity: 1;
   }
   
-  .card:hover > .img {
+  .cardallprd:hover > .img {
     height: 65%;
     filter: blur(7px);
     animation: anim 3s infinite;
@@ -306,10 +348,35 @@ nav.navbar .bg-toggel{
     }
   }
   
-  .card:hover {
+  .cardallprd:hover {
     transform: scale(1.04) rotate(-1deg);
   }
   /* -------------- */
+  /* -------- Show details*/
+  section.showdetails .btns .btn-addtocart{
+    width: 30%;
+    height: 100%;
+    background-color: var(--black-color);
+    border: 1px solid var(--golden-color);
+    padding: .5rem ;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid var(--golden-color);
+}
+  section.showdetails .btns .btn-addtocart:hover{
+    background-color: #AD844B;
+  }
+  section.showdetails form a.btn-delete svg , section.showdetails form a.btn-update svg{
+    font-size: 25px;
+    padding: .7rem ;
+    border-radius: 10px;
+    border: 1px solid var(--golden-color);
+    /* background-color: #AD844B; */
+}
+  section.showdetails form a.btn-delete path:hover ,section.showdetails form a.btn-update path:hover{
+    color:#AD844B;
+  }
+  /* ----------- End details */
   div.cartButtonContainer button.cartButton {
     --color: #fff;
     font-family: inherit;
@@ -364,10 +431,12 @@ nav.navbar .bg-toggel{
     letter-spacing: 0.05em;
     border-radius: 0.8em;
     border: none;
+    background-color: transparent;
+    border: 3px solid var(--golden-color);
     background: linear-gradient(to right, #AD844B, #AD844B);
     color: ghostwhite;
     overflow: hidden;
-    padding: 0.5rem 1rem;
+    padding: 0rem 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -381,7 +450,8 @@ nav.navbar .bg-toggel{
     display: inline-flex;
     align-items: center;
     padding: 0.5rem 1rem;
-  }
+    
+}
   
   .cssbuttons-io::before,
   .cssbuttons-io::after {
@@ -395,7 +465,8 @@ nav.navbar .bg-toggel{
   
   .cssbuttons-io::before {
     content: "";
-    background: #000;
+    background:#313131;
+    /* border: 3px solid var(--golden-color); */
     width: 120%;
     left: -10%;
     transform: skew(30deg);
@@ -466,12 +537,6 @@ section.contact form button {
 
   /* ------Panier------ */
 
-  /* @media (min-width: 1025px) {
-    .h-custom {
-        height: calc(100vh - 74px) !important;
-    }
-} */
-
 section.cart {
   background-color: var(--grey-color);
 }
@@ -481,9 +546,7 @@ section.cart {
     padding-left: 0.75em;
     padding-right: 0.75em;
 }
-/* .card-registration .select-arrow {
-    top: 13px;
-} */
+
 div.card-body div h6 a{
   text-decoration: none;
   color: var(--white-color);
@@ -608,7 +671,6 @@ button.cartButton:active:before {
 /* End Cart */
 
 
-
   /* Start footer */
 
   footer.footer ul.links li{
@@ -643,91 +705,3 @@ button.cartButton:active:before {
   /* End footer */
 
 /* Login  */
-.lg{
-    background-color: white;
-    height: 70vh;
-    width: 70%;
-    margin: auto;
-    box-shadow: 1px 7px 20px hsl(0, 0%, 65%)
-
-}
-
-.lg .form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* width: 75%; */
-}
-
-.lg .form input{
-    width: 100%;
-    /* margin: auto; */
-    border: none;
-    border-bottom: 1px solid black;
-    outline: none;
-    font-size: 1.1em;
-    padding: 5px;
-    margin-bottom: 15px;
-    margin-top: 10px;
-}
-.lg .form h2{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bold;
-    font-size: 40px;
-    letter-spacing: 2px;
-}
-
-.lg .imgLg{
-    width: 100%;
-    height:100% ;
-    background-image:url('../images/gaming.jpg') ;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: right;
-}
-.lg p.text{
-    font-weight: 500;
-}
-/* END--LOgin */
-
-/* Sign Up */
-
-.row.SIGN{
-    width: 60%;
-    border-radius: 25px;
-    padding: 1.5rem;
-    margin: auto;
-    background-color: white;
-    box-shadow: 1px 7px 20px hsl(0, 0%, 65%);
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    -ms-border-radius: 25px;
-    -o-border-radius: 25px;
-}
-input.sign{
-    width: 100%;
-    /* margin: auto; */
-    border: none;
-    border-bottom: 1px solid black;
-    outline: none;
-    font-size: 1.1em;
-    padding: 5px;
-    margin-bottom: 15px;
-    margin-top: 10px;
-}
-/* End Sign */
-
-
-
-/*  Start Section1 */
-section.section1{
-
-  height: calc(100vh - 56px);
-
-}
-
-/* End Section1 */
-
-
-  

@@ -30,6 +30,7 @@ Route::get('/gogle', function () {
 Route::get('/cat', [PaymentContoller::class, 'generatePDF']);
 
 Route::get('/', [HomeController::class, 'index'])->name('products');
+
 // // add Products
 // Route::get('/products/create', [HomeController::class, 'create'])->name('create');
 // Route::post('/products/store', [HomeController::class, 'store'])->name('store');
@@ -75,18 +76,18 @@ Route::middleware(['adminuser'])->group(function () {
     Route::get('/admin/mes  sages', [AdminController::class, 'messages'])->name('messages');
     Route::get('/admin/clients', [AdminController::class, 'clients'])->name('clients');
     Route::get('/admin/clients/{id}', [AdminController::class, 'clientsDelete'])->name('clientsDelete');
-    //Show Category 
-    Route::delete('/admin/deleteCat/{id}', [AdminController::class, 'destroyCat'])->name('destroyCat');
     // Show Choosen category
-    Route::get('/showCategory/{id}', [AdminController::class, 'showCategory'])->name('showCategory');
+    Route::delete('/admin/deleteCat/{id}', [AdminController::class, 'destroyCat'])->name('destroyCat');
 });
+//Show Category 
+Route::get('/showCategory/{id}', [HomeController::class, 'showCategory'])->name('showCategory');
 
 // -------------------------
 // Panier
 Route::get('/cart', [cartController::class, 'show']);
 Route::get('/cart/addCart/{id}', [cartController::class, 'store'])->name('add');
 Route::get('/cart/affish/', [cartController::class, 'affiche'])->name('affichage');
-// Route::get('/cart/Menu/', [cartController::class, 'Menu'])->name('Menu');
+// Route::get('/cart/Menu/', [HomeController::class, 'Menu'])->name('Menu');
 //
 Route::get('/panier', [cartController::class, 'panier'])->name('cart');
 

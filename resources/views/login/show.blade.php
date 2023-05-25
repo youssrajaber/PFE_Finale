@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -12,7 +12,10 @@
 
 </head>
 
-<body>
+<body> --}}
+<x-master>
+
+
     <x-Menu />
     <div class="container">
         <div class="row mt-5 lg">
@@ -45,4 +48,5 @@
             </div>
         </div>
     </div>
-</body>
+
+</x-master>

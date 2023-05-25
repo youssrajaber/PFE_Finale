@@ -1,5 +1,5 @@
 <x-master>
-    <x-Menu />
+    <x-Menu :prod="$prod" :count="$count" :totalPrix="$totalPrix" />
 
     <div class="cart ">
         @if (isset($prod) && count($prod) > 0)

@@ -53,15 +53,15 @@ class AdminController extends Controller
         $p->delete();
         return redirect()->back();
     }
-    public function showCategory($id)
-    {
-        $categoryName = DB::table('categories')
-            ->where('id', $id)
-            ->value('nom');
+    // public function showCategory($id)
+    // {
+    //     $categoryName = DB::table('categories')
+    //         ->where('id', $id)
+    //         ->value('nom');
 
-        $categoryProducts = DB::select('Select * from produits where idCat =' . $id);
-        return view('dashboard.allCategoryProducts', compact('categoryProducts', 'categoryName'));
-    }
+    //     $categoryProducts = DB::select('Select * from produits where idCat =' . $id);
+    //     return view('dashboard.allCategoryProducts', compact('categoryProducts', 'categoryName'));
+    // }
     public function messages()
     {
         $messages = contact::all();

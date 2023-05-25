@@ -1,4 +1,4 @@
-<x-Admin_master>
+
     <footer class="footer container py-5">
         <div class="row py-4">
             <div class="col-md-5 col-sm-12">
@@ -6,7 +6,8 @@
                     <img class="img-fluid" src="{{ asset('images/Logo.png') }}" alt="lg">
                 </div>
                 <div>
-                    <p class="grey-color fw-bold py-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum, doloribus
+                    <p class="grey-color fw-bold py-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum,
+                        doloribus
                         totam eaque rem nisi
                         iure
                         itaque tempore rerum reprehenderit dolor impedit facere laudantium hic soluta.
@@ -26,7 +27,7 @@
                 <ul class="links p-0 mt-3">
                     <li class="mb-2"><a class="grey-color" href="/">Home</a></li>
                     <li class="mb-2"><a class="grey-color" href="#about">About Us</a> </li>
-                    <li class="mb-2"><a class="grey-color" href="#">Services</a></li>
+                    <li class="mb-2"><a class="grey-color" href="#service">Services</a></li>
                     <li class="mb-2"><a class="grey-color" href="{{ route('affichage') }}">Cart</a></li>
                 </ul>
             </div>
@@ -56,4 +57,3 @@
         </div>
     </footer>
 
-</x-Admin_master>
