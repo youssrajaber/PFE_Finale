@@ -17,9 +17,7 @@
   --font-p: 'Roboto Slab', serif;
   
 }
-.c{
-  background-color: #911d1d;
-}
+
 .bg-black{
   background-color: var(--black-color);
 }
