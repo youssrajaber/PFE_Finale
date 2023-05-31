@@ -1,45 +1,48 @@
-<x-Dashboard-Admin>
+<x-Dashboard-Admin :messages="$messages" :totalcontact="$totalcontact">
     <main>
         <div class="container px-4">
-            <h1 class="mt-4">All Orders</h1>
-            <table class="table">
-                <tr>
-                    <th>Image</th>
-                    <th>Email</th>
-                    <th>Date</th>
-                    <th>Adress</th>
-                    <th>Telephone</th>
-                    <th>Total</th>
-                    <th>Payment</th>
+            <h1 class="mt-4 text-center fw-bold text-uppercase gold-color">All Orders</h1>
+            <table class="table table-dark mt-4">
+                <tr class="  fw-bold ">
+                    <th class="">Image</th>
+                    <th class="">Email</th>
+                    <th class="">Date</th>
+                    <th class="">Adress</th>
+                    <th class="">Telephone</th>
+                    <th class="">Total</th>
+                    <th class="">Payment</th>
                 </tr>
                 @foreach ($allOrders as $allOrder)
-                    <tr>
-                        <td>
-                            <img class="card-img-top " style="width: 5rem" src="{{ asset('images/' . $allOrder->image) }}"
-                                alt="photo" />
+                    <tr class=" ">
+                        <td class="align-middle">
+                            <img class="card-img-top rounded-circle " style="width: 5rem"
+                                src="{{ asset('images/' . $allOrder->image) }}" alt="photo" />
                         </td>
-                        <td>
+                        <td class="align-middle">
                             <h4>{{ $allOrder->email }}</h4>
                         </td>
 
-                        <td>
+                        <td class="align-middle">
                             <p>{{ $allOrder->date }}</p>
                         </td>
-                        <td>
+                        <td class="align-middle">
                             <span>{{ $allOrder->Adress }}</span>
                         </td>
-                        <td>
+                        <td class="align-middle">
                             <p>{{ $allOrder->Telephone }}</p>
                         </td>
-                        <td>
+                        <td class="align-middle">
                             <p>{{ $allOrder->total }}DH</p>
                         </td>
-                        <td>
+                        <td class="align-middle">
                             <p>{{ $allOrder->payment }}</p>
                         </td>
                     </tr>
                 @endforeach
             </table>
+            <div class="pagination py-4">
+                {{ $allOrders->links() }}
+            </div>
         </div>
     </main>
 </x-Dashboard-Admin>

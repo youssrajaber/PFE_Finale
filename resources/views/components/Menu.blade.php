@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg ">
+{{-- <nav class="navbar navbar-expand-lg ">
     <div class="container">
         <a class="navbar-brand" href="/">
             <img class="w-75" src="{{ asset('images/Logo.png') }}" alt="">
@@ -92,7 +92,111 @@
             @endauth
         </div>
     </div>
+</nav> --}}
+@if (!isset($count) || !isset($prod) || !isset($totalPrix))
+    {{ $count = null }}
+    {{ $totalPrix = null, $prod = null }}
+@endif
+
+<nav class="navbar navbar-expand-lg container">
+
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img class="w-75" src="{{ asset('images/Logo.png') }}" alt="">
+        </a>
+        <button class="navbar-toggler bg-toggel" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+
+            <ul class="navbar-nav nv me-auto mb-2 mb-lg-0 mx-auto">
+                <li class="nav-item ">
+                    <a class="nav-link white-color fw-bold " href="/">HomePage</a>
+                </li>
+                <li class="nav-item">
+                    <a class=" nav-link white-color fw-bold" href="{{ url('/' . '#about') }}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link white-color fw-bold" href="{{ url('/' . '#service') }}">Services</a>
+                </li>
+                {{-- @auth
+                    <li class="nav-item">
+                        <a class=" nav-link white-color fw-bold" href="{{ route('affichage') }}">Cart</a>
+                    </li>
+                @endauth --}}
+                <li class="nav-item">
+                    <a class="nav-link white-color fw-bold" href="{{ url('/' . '#contact') }}">Contact Us</a>
+                </li>
+            </ul>
+            @guest
+                <div class="d-flex nav-btn ">
+                    <div class="me-2 btn ">
+                        <a class="nav-link fw-bold" href="{{ route('login.show') }}">login</a>
+                    </div>
+                    <div class="ms-2  btn">
+                        <a class="nav-link fw-bold" href="{{ route('login.create') }}">Sign up</a>
+                    </div>
+                </div>
+            @endguest
+            @auth
+                <div class="d-flex align-items-center">
+                    <!-- Scrollable modal -->
+                    <!-- Button trigger modal -->
+
+                    <div class="me-3 position-relative" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        @if (Auth::user())
+                            @if (Auth::user()->role === 'USER')
+                                <a class="" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                                    aria-controls="offcanvasExample">
+                                    <i class="fs-3 fa fa-shopping-basket gold-color" role="button"></i>
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">{{ $count }}</span>
+                                </a>
+                            @endif
+                        @endif
+                    </div>
+                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle gold-color" id="navbarDropdown" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="rounded-circle" style="width: 40px; height: 40px;"
+                                    src="{{ asset('images/' . auth()->user()->image) }}" alt="">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end nv  bg-dark" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item white-color fw-bold"
+                                        href="{{ route('details', [auth()->user()->email, auth()->user()->name]) }}">
+                                        Profil
+                                    </a>
+                                </li>
+                                @if (Auth::user())
+                                    @if (Auth::user()->role === 'ADMIN')
+                                        <li class="nav-item">
+                                            <a class="dropdown-item white-color fw-bold"
+                                                href="{{ route('ADM') }}">Dashboard</a>
+                                        </li>
+                                    @endif
+                                    <li class="nav-item">
+                                        <a class="dropdown-item white-color fw-bold"
+                                            href="{{ route('affichage') }}">Cart</a>
+                                    </li>
+                                @endif
+
+                                <li>
+                                    <hr class="dropdown-divider" />
+                                </li>
+                                <li><a class="dropdown-item white-color fw-bold" href="{{ route('logout') }}">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            @endauth
+        </div>
+    </div>
 </nav>
+
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 

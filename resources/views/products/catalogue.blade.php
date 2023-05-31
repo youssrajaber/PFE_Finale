@@ -1,28 +1,18 @@
-<h1 class="text-center">Welcome to ElectroCity</h1>
-<h2> Liste des Prduits </h2>
-
-<table class="table table-dark border">
-    <thead>
-        <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Prix</th>
-            <th scope="col">quantite</th>
-            <th scope="col">totale</th>
-
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach ($products as $item)
-            <tr>
-                <td>{{ $item->nom }}</td>
-                <td>{{ $item->prix }}DH</td>
-                <td>{{ $item->quantite }}</td>
-                <td>{{ $item->totale }}DH</td>
-
-            </tr>
+<div>
+    <div style="padding:3rem">
+        <h3 style="text-align: center;margin-buttom:1rem;font-weight:bold;margin-bottom:3rem;">
+            Summary</h3>
+        <hr style="margin-bottom: 2rem;margin-top:2rem;">
+        <h5 style="font-size: 2rem;">Products</h5>
+        @foreach ($products as $prd)
+            <div style="display: flex;">
+                <div>{{ $prd->nom }} {{ $prd->quantite }} x
+                    {{ $prd->prix }}DH</div>
+            </div>
         @endforeach
-
-
-    </tbody>
-</table>
+        <hr style="margin-bottom: 2rem;margin-top:2rem;">
+        <div style=" margin-bottom :3rem;">
+            <h5 style="font-size: 2rem;">Total price : {{ $total }} DH</h5>
+        </div>
+    </div>
+</div>

@@ -3,10 +3,14 @@
     height: 100vh;
   }
 }
+
 *{
     box-sizing: border-box;
     padding: 0px;
     margin: 0px;
+  }
+  html{
+    scroll-behavior: smooth;
   }
 :root{
   --black-color : #000000;
@@ -17,16 +21,45 @@
   --font-p: 'Roboto Slab', serif;
   
 }
-
+/* background-Color */
 .bg-black{
   background-color: var(--black-color);
+}
+.bg-side{
+  background-color: #141414;
+}
+.bg-tr{
+  background-color: #222222;
 }
 .bg-grey{
   background-color: var(--grey-color);
 }
+.bg-content{
+  background-color:#202020 ;
+}
 .bg-gold{
   background-color: var(--golden-color);
 }
+.bg-nav{
+  background-color: #212529;
+  
+}
+.topbar .dropdown-list .dropdown-header {
+  background-color: var(--golden-color);
+  border: 1px solid #AD844B;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #000000;
+}
+@media (max-width:576px) {
+  .table{
+    display: block;
+    width: 100%;
+    overflow-x: auto; 
+  }
+}
+/* background */
+
 /* dashboard */
 
 #wrapper #content-wrapper {
@@ -40,10 +73,21 @@
   color: var(--white-color);
   background-color: var(--grey-color);
 }
-
-
+.sidebar-dark .nav-item .nav-link{
+  color: #fff;
+}
+.sidebar-dark .nav-item .nav-link:hover{
+  color: #AD844B;
+  font-weight: bold;
+}
+.text-gray-800{
+  color: var(--golden-color);
+}
 /* End Dashboard */
 
+/* .btn:focus-visible {
+  background-color: var(--golden-color);;
+} */
 /* Focus-- */
   ::selection {
     color: var(--grey-color);
@@ -55,7 +99,7 @@
   .offcanvas-body{
     padding: 0;
   }
-  .btn-close:focus ,.btn:focus{
+  .btn-close:focus ,.btn:focus , .page-link:focus{
     box-shadow: none;
   }
   textarea{
@@ -64,6 +108,14 @@
 .nav-link:focus{
   color: var(--white-color);
 }
+.form-control:focus {
+  box-shadow: none;
+}
+.bg-input:focus{
+  background:rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
 /* ---EndFcs--- */
 
 /* Start Scroll */
@@ -90,9 +142,26 @@
 
 /* End Scroll */
 
+/* Start  Pagination */
+.page-item.active .page-link {
+  z-index: 3;
+  color: white;
+  background-color: var(--golden-color);
+  border-color: var(--golden-color);
+}
+.page-item .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color:var(--grey-color) ;
+  border-color: var(--grey-color);
+}
+
+/* End  Pagination */
+
 body{
   background-color: var(--black-color);
 }
+
 /* Colores */
   .white-color{
   color: var(--white-color);
@@ -110,16 +179,19 @@ body{
   .title{
     font-family: var(--font-title);
     font-weight: bold;
-    font-size: 5em;
+    font-size: 6em;
     letter-spacing: 5px;
+  }
+  @media (max-width:615px) {
+    .title{
+      font-size: 3rem;
+    }
   }
 
   .titre {
-    color: var(--golden-color);
-    /* background-color: var(--golden-color); */
+    color: var(--golden-color)
   }
   .paragraphe{
-    /* font-family: sans-serif ; */
     color: #545454;
     /* color: var(--golden-color); */
   }
@@ -140,6 +212,9 @@ body{
   nav.navbar .nav-btn div:hover,header .modal .modal-footer .btn ,section.contact form button:hover {
     
     background-color: var(--golden-color);
+  }
+  nav  .nav-item a:hover,nav  .nav-item a:active{
+    background-color: transparent;
   }
   /* btn-toggel */
   nav.navbar .bg-toggel{
@@ -188,17 +263,30 @@ body{
 
   /*  START services*/
 
+  section.service {
+    background-color: #212529;
+  }
+  section.service .header  svg{
+    font-size: 3.5rem;
+    padding: 3rem;
+    border-radius: 100%;
+    background-color:var(--grey-color);
+    color: var(--golden-color);
+  }
   section.service .cards .card{
+    color: aliceblue;
+    background-color: var(--black-color);
     padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     
   }
-
-  section.service .cards .card .header{
-    width: 120px;
-    height: 120px;
+  section.service .cards .card .cardtitle {
+    color: var(--golden-color);
+  }
+  section.service .cards .card .cardtext{
+    color: var(--grey-color);
   }
 
   /*  End services*/
@@ -222,7 +310,6 @@ body{
     color: var(--golden-color);
   }
 
-  /*  */
   section.Category .card {
     width: 100%;
     height: 100%;
@@ -350,6 +437,27 @@ body{
     transform: scale(1.04) rotate(-1deg);
   }
   /* -------------- */
+    /*  paymentCash page */
+    section.payment button.btn-pay{
+      background-color: var(--golden-color);
+    }
+  /* End payment page */
+
+  /* paymentCard */
+  section.paymentCard{
+    margin-top:10rem ;
+  }
+  section.paymentCard .credit-card-box {
+    margin: auto;
+    box-shadow: 0px 0px 3rem  var(--golden-color) ;
+    width: 60%;
+    padding: 3rem;
+    margin-top: .5rem;
+  }
+  section.paymentCard .credit-card-box button:hover{
+    color: white;
+  }
+  /* End paymentCash */
   /* -------- Show details*/
   section.showdetails .btns .btn-addtocart{
     width: 30%;
@@ -364,17 +472,19 @@ body{
   section.showdetails .btns .btn-addtocart:hover{
     background-color: #AD844B;
   }
-  section.showdetails form a.btn-delete svg , section.showdetails form a.btn-update svg{
+  section.showdetails form a.btn-delete i , section.showdetails form a.btn-update i{
     font-size: 25px;
     padding: .7rem ;
     border-radius: 10px;
     border: 1px solid var(--golden-color);
-    /* background-color: #AD844B; */
-}
-  section.showdetails form a.btn-delete path:hover ,section.showdetails form a.btn-update path:hover{
-    color:#AD844B;
   }
+  section.showdetails form a.btn-delete i:hover ,section.showdetails form a.btn-update i:hover{
+    background-color: #AD844B;
+    
+  }
+
   /* ----------- End details */
+
   div.cartButtonContainer button.cartButton {
     --color: #fff;
     font-family: inherit;
@@ -478,27 +588,7 @@ body{
   .cssbuttons-io:active {
     transform: scale(0.95);
   }  
-  /* <!-- Demo styles --> */
-/* Start TopProducts */
-    .swiper {
-      width: 100%;
-      padding-top: 50px;
-      padding-bottom: 50px;
-    }
 
-    .swiper-slide {
-      background-position: center;
-      background-size: cover;
-      width: 300px;
-      height: 300px;
-    }
-
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-    }
-    /* End TopProducts */
-    
 /*-------------  */
   /* --Start ContactUs-- */
   section.contact{
@@ -510,19 +600,13 @@ body{
     align-items: center;
 
   }
-  section.contact .row form .bg-input{
+  form .bg-input{
     background:rgba(255, 255, 255, 0.2);
     border: var(--grey-color) 1px solid;
     outline: none ;
     border: none;
   }
-  .form-control:focus{
-    box-shadow: none;
-  }
-  section.contact .row .drapo .titre{
-  font-size: 20px;
-  margin-bottom: .7rem;
-}
+
 
 section.contact form button {
   background-color: var(--golden-color);
@@ -568,10 +652,64 @@ div.card-body form button.delete-btn:hover{
 }
 
 /* Cart -------  button */
+
+/* Start All-btns  */
+.bg-btnn{
+  color: #fff;
+  font-family: inherit;
+  display: inline-block;
+  width: 6rem;
+  height: 2.75rem;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--golden-color);
+  background-color: #000000;
+  transition: color 0.5s;
+  z-index: 1;
+  font-size: 17px;
+  border-radius: 6px;
+  font-weight: 500;
+  color: var(--color);
+  padding: 0;
+}
+.bg-btnn:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: var(--golden-color);
+  height: 150px;
+  width: 200px;
+  border-radius: 50%;
+}
+.bg-btnn:hover  {
+  color: #fff;
+  border: 2px solid var(--golden-color);
+  
+}
+.bg-btnn a:hover{
+  
+  text-decoration: none;
+}
+.bg-btnn:before  {
+  top: 100%;
+  left: 100%;
+  transition: all 0.7s;
+}
+.bg-btnn:hover:before  {
+  top: -30px;
+  left: -30px;
+}
+.bg-btnn:active:before  {
+  border: 2px solid var(--golden-color);
+  background: var(--golden-color);
+  transition: background 0s;
+}
+/*  End All-btns  */
+
 /* cats btn */
 
 div.summary button.cartButton  {
-  --color: #fff;
+  color: #fff;
   font-family: inherit;
   display: inline-block;
   width: 7rem;
@@ -610,7 +748,7 @@ div.summary button.cartButton:hover:before  {
   left: -30px;
 }
 div.summary button.cartButton:active:before  {
-  border: 2px solid var(--golden-color);
+    border: 2px solid var(--golden-color);
     background: var(--golden-color);
     transition: background 0s;
 }

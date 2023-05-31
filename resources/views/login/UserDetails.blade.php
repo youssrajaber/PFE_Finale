@@ -1,68 +1,57 @@
 <x-master>
+    <x-Menu :prod="$prod" :count="$count2" :totalPrix="$totalPrix" />
+    <div class="container w-75 mx-auto">
 
-    <main>
-        <div class="container px-4">
-            <h1 class="mt-4">Profile Details</h1>
-            <form action="{{ route('editProfile') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('Put')
-                <div class="text-center">
+        <form action="{{ route('editProfile') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('Put')
+            <div class="text-center">
+
+                <div>
                     <div>
-                        <input type="text" name="nom" value="{{ $name }}">
+                        @foreach ($image as $image)
+                            <img class="img-fluid w-25 rounded-circle" src="{{ asset('images/' . $image->image) }}"
+                                alt="managment.jpg">
+                        @endforeach
+
+                        <div class="row g-2 my-3">
+                            <div class="col-6">
+                                <input type="text" class="form-control bg-input fw-bold" name="nom"
+                                    value="{{ $name }}">
+                            </div>
+
+                            <div class="col-6">
+
+                                <input type="text" name="tele" class="form-control bg-input fw-bold"
+                                    value="{{ auth()->user()->Telephone }}">
+
+                            </div>
+
+                        </div>
+                        <div class="row my-3 ">
+                            <div class="col">
+
+                                <input type="text" name="addres" class="form-control bg-input fw-bold"
+                                    value="{{ auth()->user()->Adress }}">
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <input type="text" name="email" class="form-control bg-input fw-bold"
+                                    value="{{ $email }}">
+                            </div>
+                        </div>
+                        <div class="input-group my-4">
+                            <input type="file" name="image" class="form-control bg-input fw-bold">
+                        </div>
                     </div>
-                    <div>
-                        <div>
-                            @foreach ($image as $image)
-                                <img class="img-fluid w-25 rounded-circle" src="{{ asset('images/' . $image->image) }}"
-                                    alt="managment.jpg">
-                            @endforeach
-                            <input type="file" name="image">
-                        </div>
-                        <div>
-                            <h5> Nombre de commande :{{ $count }}</h5>
-                        </div>
-                        <h2>
-                            <input type="text" name="email" value="{{ $email }}">
-                            <input type="text" name="tele" value="{{ auth()->user()->Telephone }}">
-                            <input type="text" name="addres" value="{{ auth()->user()->Adress }}">
-                        </h2>
-                        <button class="btn btn-dark">Save</button>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-dark me-2 bg-btnn">Save</button>
+                        <button class="btn btn-dark ms-2 bg-btnn"><a href="/">Cancel</a> </button>
                     </div>
                 </div>
-            </form>
-            
-            @if (!empty($historiques))
+            </div>
+        </form>
+    </div>
 
-                <table class="table">
-                    <tr>
-                        <th>Image</th>
-                        <th>nom</th>
-                        <th>quantite</th>
-                        <th>prix</th>
-                        <th>Total</th>
-                    </tr>
-                    @foreach ($historiques as $allOrder)
-                        <tr>
-                            <td>
-                                <img class="card-img-top " style="width: 5rem"
-                                    src="{{ asset('images/' . $allOrder->image) }}" alt="photo" />
-                            </td>
-                            <td>
-                                <p>{{ $allOrder->nom }}</p>
-                            </td>
-                            <td>
-                                <span>{{ $allOrder->prix }}</span>
-                            </td>
-                            <td>
-                                <p>{{ $allOrder->quantite }}</p>
-                            </td>
-                            <td>
-                                <p>{{ $allOrder->totale }}DH</p>
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-            @endif
-        </div>
-    </main>
 </x-master>

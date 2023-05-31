@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\categories;
 use App\Models\commande;
 use App\Models\contact;
+use App\Models\historique;
 use App\Models\produit;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,26 +18,36 @@ class AdminController extends Controller
     {
         $totalprd = produit::all()->count();
         $totalcmd = commande::all()->count();
+        $totalcontact = contact::all()->count();
+
         $totalusers = User::all()->count();
-        return view('dashboard.dashboard', compact('totalprd', 'totalcmd', 'totalusers'));
+        $messages = $this->messages();
+        return view('dashboard.dashboard', compact('totalprd', 'totalcmd', 'totalusers', 'messages', 'totalcontact'));
     }
     public function AllOrder()
     {
+        $messages = $this->messages();
         $allOrders = DB::table('commandes')
             ->join('users', 'commandes.idUser', '=', 'users.id')
             ->select('users.email', 'users.image', 'commandes.date', 'commandes.Adress', 'commandes.Telephone', 'commandes.total', 'commandes.payment')
-            ->get();
-        return view('dashboard.AdminOrder', compact('allOrders'));
+            ->paginate(4);
+        $totalcontact = contact::all()->count();
+        return view('dashboard.AdminOrder', compact('allOrders', 'messages', 'totalcontact'));
     }
     public function AllPrd()
     {
-        $allPrd = produit::all();
-        return view('dashboard.Allprd', compact('allPrd'));
+        $messages = $this->messages();
+        $allPrds = produit::paginate(4);
+        $totalcontact = contact::all()->count();
+        return view('dashboard.Allprd', compact('allPrds', 'messages', 'totalcontact'));
     }
     public function AddCategory()
     {
         $showAll = categories::all();
-        return view('dashboard.AddCategory', compact('showAll'));
+        $messages = $this->messages();
+        $totalcontact = contact::all()->count();
+
+        return view('dashboard.AddCategory', compact('showAll', 'messages', 'totalcontact'));
     }
     public function store(Request $req)
     {
@@ -53,24 +64,33 @@ class AdminController extends Controller
         $p->delete();
         return redirect()->back();
     }
-    // public function showCategory($id)
-    // {
-    //     $categoryName = DB::table('categories')
-    //         ->where('id', $id)
-    //         ->value('nom');
 
-    //     $categoryProducts = DB::select('Select * from produits where idCat =' . $id);
-    //     return view('dashboard.allCategoryProducts', compact('categoryProducts', 'categoryName'));
-    // }
     public function messages()
     {
         $messages = contact::all();
-        return view('components.messages', compact('messages'));
+        return $messages;
+    }
+
+    public function messagesView()
+    {
+        $messages = contact::all();
+        $totalcontact = contact::all()->count();
+        return view('components.messages', compact('messages', 'totalcontact'));
+        // return view('components.Dashboard-Admin', compact('messages'));
+
+    }
+    public function msgadmin()
+    {
+        $messages = $this->messages();
+        $totalcontact = contact::all()->count();
+        return view('dashboard.dashboard', compact('messages', 'totalcontact'));
     }
     public function clients()
     {
         $clients = User::where('role', 'USER')->get();
-        return view('dashboard.clients', compact('clients'));
+        $messages = $this->messages();
+        $totalcontact = contact::all()->count();
+        return view('dashboard.clients', compact('clients', 'messages', 'totalcontact'));
     }
     public function clientsDelete($id)
     {

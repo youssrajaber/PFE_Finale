@@ -27,13 +27,10 @@ Route::get('/gogle', function () {
     return redirect()->away('https://www.google.com');
 })->name('roton');
 
-Route::get('/cat', [PaymentContoller::class, 'generatePDF']);
+Route::get('/cat', [PaymentContoller::class, 'generatePDF'])->name('pdf');
 
 Route::get('/', [HomeController::class, 'index'])->name('products');
 
-// // add Products
-// Route::get('/products/create', [HomeController::class, 'create'])->name('create');
-// Route::post('/products/store', [HomeController::class, 'store'])->name('store');
 //show More
 Route::get('/products/{id}', [HomeController::class, 'show'])->name('product')->where('id', '\d+');
 // /d+ dicimal (+ 1)
@@ -73,7 +70,9 @@ Route::middleware(['adminuser'])->group(function () {
     //Add Category 
     Route::get('/admin/category', [AdminController::class, 'AddCategory'])->name('AddCat');
     Route::post('/admin/cat', [AdminController::class, 'store'])->name('Addcategory');
-    Route::get('/admin/mes  sages', [AdminController::class, 'messages'])->name('messages');
+    // message
+    Route::get('/admin/messages', [AdminController::class, 'messagesView'])->name('messages');
+    //Client
     Route::get('/admin/clients', [AdminController::class, 'clients'])->name('clients');
     Route::get('/admin/clients/{id}', [AdminController::class, 'clientsDelete'])->name('clientsDelete');
     // Show Choosen category
@@ -84,12 +83,12 @@ Route::get('/showCategory/{id}', [HomeController::class, 'showCategory'])->name(
 
 // -------------------------
 // Panier
-Route::get('/cart', [cartController::class, 'show']);
+
 Route::get('/cart/addCart/{id}', [cartController::class, 'store'])->name('add');
 Route::get('/cart/affish/', [cartController::class, 'affiche'])->name('affichage');
 // Route::get('/cart/Menu/', [HomeController::class, 'Menu'])->name('Menu');
 //
-Route::get('/panier', [cartController::class, 'panier'])->name('cart');
+// Route::get('/panier', [cartController::class, 'panier'])->name('cart');
 
 // Supprimer  panier
 
@@ -105,7 +104,7 @@ Route::post('/payment/info', [PaymentContoller::class, 'payInfos'])->name('payIn
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contactPost', [HomeController::class, 'contactPost'])->name('contactPost');
 // search------
-Route::get('/search', [HomeController::class, 'search'])->name('search');
+
 
 
 

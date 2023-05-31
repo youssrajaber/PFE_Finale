@@ -1,19 +1,17 @@
 <x-master>
     <x-Menu :prod="$prod" :count="$count" :totalPrix="$totalPrix" />
-    <section class=" showdetails container py-5 d-flex align-items-center ">
-        <div class="row">
+    <section class=" showdetails container py-5 ">
+        <div class="row d-flex align-items-center justify-content-between">
             <div class="col-md-5">
-                <img class="card-img-top " src="{{ asset('images/' . $product->image) }}" alt="photo" />
+                <img class="card-img-top" src="{{ asset('images/' . $product->image) }}" alt="photo" />
             </div>
             <div class=" btns col-md-7">
                 <div class=" py-2">
-                    {{-- <h1 class="gold-color"> Produit</h1> --}}
-                    <h1 class="gold-color text-uppercase  mb-3">{{ $product->nom }} ROLOLVERO VERO</h1>
-                    <h4 class="white-color  mt-4 text-capitalize"><span class="gold-color">Just with</span>  : {{ $product->prix }}DH</h4>
+                    <h1 class="gold-color text-uppercase  mb-3">{{ $product->nom }} </h1>
+                    <h4 class="white-color  mt-4 text-capitalize"><span class="gold-color">Just with</span> :
+                        {{ $product->prix }}DH</h4>
                     <p class="white-color paragraphe mt-5  fw-bold fs-5 grey-color ">{{ $product->Discription }}
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus aperiam, sunt et inventore
-                        explicabo excepturi odio sint quam autem ipsum nulla totam. Maiores cum cupiditate
-                        exercitationem velit impedit, voluptates est!
+                    
                     </p>
                 </div>
                 <div class="d-flex justify-content-between">

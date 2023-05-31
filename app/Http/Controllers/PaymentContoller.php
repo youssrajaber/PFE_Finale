@@ -19,6 +19,40 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentContoller extends Controller
 {
+    public function Menu()
+    {
+        //         
+        if (Auth::user()) {
+            $prod = DB::table('produits')
+                ->join('carts', 'carts.idPrd', '=', 'produits.id')
+                ->select('produits.id', 'produits.nom', 'produits.quantite', 'produits.prix', 'produits.image', 'carts.quantite')
+                ->where('carts.idUser', '=', auth()->user()->id)
+                ->get();
+            $getTotal = DB::table('produits')
+                ->join('carts', 'produits.id', '=', 'carts.idPrd')
+                ->select('produits.prix', 'carts.quantite')
+                ->where('carts.idUser', '=', auth()->user()->id)
+                ->get();
+            $totalPrix = (int)'carts.quantite';
+            foreach ($getTotal as $item) {
+                $prix = $item->prix;
+                $quantity = $item->quantite;
+                $totalPrix += $prix * $quantity;
+            };
+            DB::table('carts')
+                ->join('produits', 'produits.id', '=', 'carts.idPrd')
+                ->where('carts.idUser', '=', auth()->user()->id)
+                ->update(['carts.totale' => $totalPrix]);
+
+            $count = DB::table('carts')->where('carts.idUser', '=', auth()->user()->id)->count();
+        } else {
+            $prod = null;
+            $totalPrix = null;
+            $count = null;
+        }
+        // return view('components.Menu', compact('prod', 'totalPrix', 'count'));
+        return [$prod, $totalPrix, $count];
+    }
     public function generatePDF()
     {
         $produits = DB::table('carts')
@@ -26,9 +60,13 @@ class PaymentContoller extends Controller
             ->select('produits.nom', 'produits.prix', 'carts.quantite', 'carts.totale')
             ->where('carts.idUser', '=', auth()->user()->id)
             ->get();
+        $total = DB::table('carts')
+            ->where('idUser', '=', auth()->user()->id)
+            ->value('totale');
 
         $data = [
-            'products' => $produits
+            'products' => $produits,
+            'total' => $total
         ];
 
         $pdf = PDF::loadView('products.catalogue', $data);
@@ -86,7 +124,11 @@ class PaymentContoller extends Controller
     }
     public function payInfosget()
     {
-        return view('login.PayCach');
+        $paramss = $this->Menu();
+        $prod = $paramss[0];
+        $totalPrix = $paramss[1];
+        $count = $paramss[2];
+        return view('login.PayCach', compact('prod', 'totalPrix', 'count'));
     }
     public function payInfos(Request $req)
     {
@@ -121,6 +163,6 @@ class PaymentContoller extends Controller
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         }
 
-        return redirect('/')->with('success', 'tamamo Tamam  !!!');
+        return redirect('/')->with('success', '  Parfait!!!');
     }
 }

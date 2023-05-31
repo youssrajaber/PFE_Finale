@@ -72,14 +72,12 @@ class HomeController extends Controller
     }
 
 
-    public function home()
-    {
-        return view('components.Home');
-    }
     public function create()
     {
+        $messages = $this->messages();
         $showAll = categories::all();
-        return view('dashboard.CreatePrd', compact('showAll'));
+        $totalcontact = contact::all()->count();
+        return view('dashboard.CreatePrd', compact('showAll', 'messages', 'totalcontact'));
     }
     public function store(Request $req)
     {
@@ -193,5 +191,12 @@ class HomeController extends Controller
 
         $categoryProducts = DB::select('Select * from produits where idCat =' . $id);
         return view('dashboard.allCategoryProducts', compact('categoryProducts', 'categoryName', 'prod', 'totalPrix', 'count'));
+    }
+
+    // Message
+    public function messages()
+    {
+        $messages = contact::all();
+        return $messages;
     }
 }

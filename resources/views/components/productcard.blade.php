@@ -10,7 +10,7 @@
             <span class="text head  fw-bold gold-color fs-4">{{ $prd->nom }}</span>
             <span class="text price fw-bold  fw-bold">{{ $prd->prix }}DH</span>
         </div>
-        <p class="mt-3 fs-5 ">{{ $prd->Discription }}</p>
+        <p class="mt-3 fs-5 ">{{ Str::limit($prd->Discription , 40) }}</p>
     </div>
     @auth
         {{--  --}}

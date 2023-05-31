@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // use App\Models\client;
 
+use App\Models\contact;
 use App\Models\historique;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -74,6 +75,13 @@ class loginController extends Controller
         Auth::logout();
         return redirect()->route('login.show')->with('success', 'deconecte ! ');
     }
+    // Message
+    public function messages()
+    {
+        $messages = contact::all();
+        return $messages;
+    }
+
     public function details($name, $email)
     {
         $image = DB::table('users')
@@ -89,21 +97,24 @@ class loginController extends Controller
             ->select('produits.nom', 'produits.prix', 'produits.image', 'historiques.quantite', 'historiques.totale')
             ->where('historiques.idUser',  auth()->user()->id)
             ->get();
-        // $totalSum = DB::table('historiques')
-        //     ->join('users', 'users.id', '=', 'historiques.idUser')
-        //     ->where('historiques.idUser', auth()->user()->id)
-        //     ->sum('historiques.totale');
 
         $totalSum = DB::table('historiques')
             ->join('users', 'historiques.idUser', '=', 'users.id')
             ->where('historiques.idUser', auth()->user()->id)
             ->sum('historiques.totale');
 
+        $messages = $this->messages();
+        $totalcontact = contact::all()->count();
+        $totalhst = historique::all()->count();
 
         if (auth()->user()->role === 'ADMIN') {
-            return view('login.ProfileDetails', compact('email', 'name', 'image', 'count', 'historiques', 'totalSum'));
+            return view('login.ProfileDetails', compact('email', 'name', 'image', 'count', 'historiques', 'totalSum', 'messages', 'totalcontact', 'totalhst'));
         } else {
-            return view('login.UserDetails', compact('email', 'name', 'image', 'count', 'historiques'));
+            $paramss = $this->Menu();
+            $prod = $paramss[0];
+            $totalPrix = $paramss[1];
+            $count2 = $paramss[2];
+            return view('login.UserDetails', compact('email', 'name', 'image', 'count', 'historiques', 'prod', 'totalPrix', 'count2', 'totalhst'));
         }
     }
 
@@ -134,5 +145,39 @@ class loginController extends Controller
 
         ]);
         return  back()->with('success', 'profile updated');
+    }
+    public function Menu()
+    {
+        //
+        if (Auth::user()) {
+            $prod = DB::table('produits')
+                ->join('carts', 'carts.idPrd', '=', 'produits.id')
+                ->select('produits.id', 'produits.nom', 'produits.quantite', 'produits.prix', 'produits.image', 'carts.quantite')
+                ->where('carts.idUser', '=', auth()->user()->id)
+                ->get();
+            $getTotal = DB::table('produits')
+                ->join('carts', 'produits.id', '=', 'carts.idPrd')
+                ->select('produits.prix', 'carts.quantite')
+                ->where('carts.idUser', '=', auth()->user()->id)
+                ->get();
+            $totalPrix = (int)'carts.quantite';
+            foreach ($getTotal as $item) {
+                $prix = $item->prix;
+                $quantity = $item->quantite;
+                $totalPrix += $prix * $quantity;
+            };
+            DB::table('carts')
+                ->join('produits', 'produits.id', '=', 'carts.idPrd')
+                ->where('carts.idUser', '=', auth()->user()->id)
+                ->update(['carts.totale' => $totalPrix]);
+
+            $count = DB::table('carts')->where('carts.idUser', '=', auth()->user()->id)->count();
+        } else {
+            $prod = null;
+            $totalPrix = null;
+            $count = null;
+        }
+        // return view('components.Menu', compact('prod', 'totalPrix', 'count'));
+        return [$prod, $totalPrix, $count];
     }
 }

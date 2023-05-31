@@ -40,8 +40,6 @@ class cartController extends Controller
                 ->where('idUser', '=', $userid)
                 ->where('idPrd', '=', $id)
                 ->update(['quantite' =>  $quantite + 1]);
-            // dd($quantitePrd);
-
 
         } else {
             $idd = $id;
@@ -55,7 +53,6 @@ class cartController extends Controller
                 ->update(['quantite' =>  $quantitePrd - 1]);
         }
         return redirect()->route('affichage')->with('success', 'votre produit est bien ajouter');
-        // return redirect()->route('products')->with('success', 'votre produit est bien ajouter');
     }
     public function affiche(Request $req)
     {

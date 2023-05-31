@@ -1,36 +1,61 @@
-<x-master>
+
+<x-authLinks>
     <x-Menu />
-    <div class="container signBg">
-        <h2 class="text-center mt-3 ">ProFile</h2>
-        <div class="row justify-content-center SIGN ">
-            <div class="col-md-8">
-                <form method="POST" action="{{ route('login.store') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class=" mt-2 mb-3">
-                        <input type="text" name="name" placeholder="Name" class="sign">
-                        <div>
-                            <input type="text" name="email" placeholder="Email" class="sign">
-                            @error('email')
-                                {{ $message }}
-                            @enderror
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4 fw-bold">Create an Account !</h1>
+                            </div>
+                            <form class="user" method="POST" action="{{ route('login.store') }}"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group ">
+                                    <input type="text" name="name" class="form-control form-control-user "
+                                        id="exampleFirstName" placeholder="Name" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control form-control-user"
+                                        id="exampleInputEmail" placeholder="Email Address" />
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" name="phone" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Phone" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="addrs" placeholder="Adress"
+                                            class="form-control form-control-user" id="exampleRepeatPassword" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" name="phone" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="password" />
+                                    </div>
+                                    <div class="col-sm-6 ">
+                                        <input type="file" name="img" class="form-control form-control-user "
+                                            id="exampleRepeatPassword" />
+
+                                    </div>
+                                </div>
+                                <button class="btn bg-black fw-bold  btn-user btn-block">Sign up</button>
+                                <hr />
+                            </form>
+                            <hr />
+                            <div class="text-center">
+                                <a class="fw-bold black-color" href="{{ Route('login.show') }}">Already have an account? Login!</a>
+                            </div>
                         </div>
-                        <div>
-                            <input type="text" name="phone" placeholder="Telephone" class="sign">
-                        </div>
-                        <div>
-                            <input type="text" name="addrs" placeholder="Adress" class="sign">
-                        </div>
-                        <div>
-                            <input type="password" name="password" placeholder="password" class="sign">
-                        </div>
-                        <div>
-                            <input type="file" name="img">
-                        </div>
-                        <div class="d-grid mt-2">
-                            <button class="btn btn-primary btn-dark btn-block">signUp</button>
-                        </div>
-                </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</x-master>
+    <x-footer />
+</x-authLinks>

@@ -27,10 +27,11 @@
                                                                 class="img-fluid rounded-3" alt="Cotton T-shirt">
                                                         </div>
                                                         <div class="col-md-2 col-lg-2 col-xl-2">
-
-                                                            <h6 class="white-color mb-0">{{ $prd->nom }}</h6>
+                                                            <h6 class="white-color mb-0 text-center">{{ $prd->nom }}
+                                                            </h6>
                                                         </div>
-                                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                        <div
+                                                            class="col-md-3 col-lg-3 col-xl-2 d-flex align-items-center justify-content-center">
                                                             <form id="1" action="{{ route('updateItem') }}"
                                                                 method="POST" class="row">
                                                                 @csrf
@@ -69,13 +70,21 @@
                                                     <hr class="my-4 white-color">
                                                 @endforeach
 
-                                                <div class="pt-5">
+                                                <div class="pt-5 d-flex justify-content-between  align-items-center">
                                                     <h6 class="mb-0  fw-bold">
                                                         <a href="/" class="">
                                                             <i class="fas fa-long-arrow-alt-left  me-2  fw-bold"></i>
                                                             Back to shop
                                                         </a>
                                                     </h6>
+                                                    <div class="cartpdf">
+                                                        <a class="text-white" href="{{ route('pdf') }}">
+                                                            <button class=" bg-btnn px-2 py-2 ">
+                                                                Print your invoice
+                                                            </button>
+                                                        </a>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -84,10 +93,10 @@
                                                 <h3 class="fw-bold mb-5 mt-2 pt-1 gold-color">Summary</h3>
                                                 <hr class="my-4">
 
-                                                <div class="d-flex justify-content-between mb-4">
-                                                    <h5 class=" white-color fw-bold">Items <span
+                                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                                    <h5 class="white-color">Total items</h5>
+                                                    <h5 class=" white-color fw-bold"> <span
                                                             class="">{{ $count }}</span></h5>
-                                                    <h5 class="white-color">{{ $totalPrix }}DH</h5>
                                                 </div>
 
                                                 <h5 class="text-uppercase mb-3 gold-color">Products</h5>
@@ -110,13 +119,13 @@
                                                 <div class="row g-2 align-items-center">
                                                     <div class="col-6  m-0  ">
                                                         <button class="cartButton">
-                                                            <a class="text-decoration-none  white-color "
+                                                            <a class="text-decoration-none  text-white "
                                                                 href="{{ route('payInfosget') }}">Cash</a>
                                                         </button>
                                                     </div>
                                                     <div class="col-6 d-flex justify-content-end m-0  ">
                                                         <button class="cartButton">
-                                                            <a class="text-decoration-none white-color "
+                                                            <a class="text-decoration-none text-white "
                                                                 href="{{ url('stripe', $totalPrix) }}">Pay Us Card</a>
 
                                                         </button>
@@ -133,9 +142,10 @@
                 </div>
             </section>
         @else
-            <div class="alert alert-danger text-center">
+            <div class="container my-5 alert alert-dark text-center">
                 There's no Product yet .
             </div>
+
         @endif
         {{--  --}}
 

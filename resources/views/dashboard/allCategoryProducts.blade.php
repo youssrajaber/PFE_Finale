@@ -4,7 +4,7 @@
 
     <div class="container py-5 ">
         <div class="row">
-            <h1 class="text-center gold-color mb-5">Category Name : {{ $categoryName }}</h1>
+            <h1 class="text-center gold-color mb-5"> {{ $categoryName }}</h1>
         </div>
         <div class="row w-100 ">
             @foreach ($categoryProducts as $prd)

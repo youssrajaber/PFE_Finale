@@ -1,52 +1,52 @@
-{{-- <!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>ElectroCity</title>
-    <link rel="icon" href="{{ asset('images/Logo.png') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
-</head>
-
-<body> --}}
-<x-master>
-
-
+<x-authLinks>
     <x-Menu />
-    <div class="container">
-        <div class="row mt-5 lg">
-            <div class=" col-md-6 form">
-                <h2>Welcome Back</h2>
-                <form method="POST" action="{{ route('loginp') }}">
-                    @csrf
-                    <div>
-                        <input type="text" name="email" value="{{ old('email') }}" placeholder="Email">
-                        @error('email')
-                            {{ $message }}
-                        @enderror
+    <section class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center w-100">
+            <div class="col-12">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5 my-5">
+                                    <div class="text-center ">
+                                        <h1 class="h4 text-gray-900 mb-4 fw-bold">Welcome Back!</h1>
+                                    </div>
+                                    <form class="user" method="POST" action="{{ route('loginp') }}">
+                                        @csrf
+                                        <div class="form-group mb-3">
+                                            <input type="email" name="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" value="{{ old('email') }}"
+                                                aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            @error('email')
+                                                {{ $message }}
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password"
+                                                class="form-control form-control-user" id="exampleInputPassword"
+                                                placeholder="Password">
+                                            @error('password')
+                                                {{ $message }}
+                                            @enderror
+                                        </div>
+                                        <button class="btn btn-block bg-black my-3 text-white fw-bold ">Login</button>
+                                        <hr>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="fw-bold black-color" href="{{ route('login.create') }}">Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <input type="password" name="password" placeholder="password">
-                        @error('password')
-                            {{ $message }}
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <button class="btn btn-block btn-dark">LogIn!</button>
-                    </div>
-                </form>
-                <p class="text">
-                    Don't Have account <a href="{{ route('login.create') }}">Sign up</a>
-                </p>
-            </div>
-            <div class="col-md-6">
-                <div class="imgLg"></div>
+                </div>
             </div>
         </div>
-    </div>
-
-</x-master>
+    </section>
+    <x-footer />
+</x-authLinks>
