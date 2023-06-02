@@ -1,5 +1,5 @@
 <x-master>
-    <x-Menu  />
+    <x-Menu />
     <section class="update-page container my-5 ">
         <h1 class="gold-color text-center text-uppercase fw-bold my-5 ">Update Products</h1>
         <div class="d-flex justify-content-center align-items-center">
@@ -20,7 +20,7 @@
                             @error('nom')
                                 {{ $message }}
                             @enderror
-                            <input type="text" class="form-control mt-2 bg-input fw-bold " id="title"
+                            <input type="text" class="form-control mt-2 bg-input fw-bold white-color  " id="title"
                                 name="nom" value={{ $pr->nom }}>
                         </div>
                         <div class="form-group mt-3">
@@ -28,7 +28,7 @@
                             @error('prix')
                                 {{ $message }}
                             @enderror
-                            <input class="form-control mt-2 bg-input fw-bold" id="content" name="prix"
+                            <input class="form-control mt-2 bg-input fw-bold white-color" id="content" name="prix"
                                 value={{ $pr->prix }}>
                         </div>
                         <div class="form-group mt-3">
@@ -36,10 +36,10 @@
                             @error('quantite')
                                 {{ $message }}
                             @enderror
-                            <input class="form-control mt-2 bg-input fw-bold" id="content" name="quantite"
+                            <input class="form-control mt-2 bg-input fw-bold white-color" id="content" name="quantite"
                                 value={{ $pr->quantite }}>
                         </div>
-                        <button type="submit" class="btn btn-update mt-3">Modifier</button>
+                        <button type="submit" class="btn btn-update mt-3 bg-btnn">Modifier</button>
                     </div>
 
                 </div>

@@ -122,19 +122,24 @@
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header white-color">Message Center</h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{ asset('img/undraw_profile_2.svg') }}"
-                                            alt="..." />
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
+                                <a class="dropdown-item " href="#">
+                                    <div class=" font-weight-bold">
                                         @foreach ($messages as $message)
-                                            <div class="text-truncate">
-                                                {{ $message->subject }}
-                                            </div>
-                                            <div class="small text-gray-500">
-                                                {{ $message->fullname }} · 58m
+                                            <div class="d-flex">
+                                                <div class="dropdown-list-image mr-3">
+                                                    <img class="rounded-circle"
+                                                        src="{{ asset('img/undraw_profile_3.svg') }}" alt="..." />
+                                                    <div class="status-indicator bg-success"></div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="text-truncate">
+                                                        {{ $message->fullname }}
+                                                    </div>
+                                                    <div class="small text-gray-500">
+                                                        {{ $message->subject }} · 58m
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         @endforeach
                                     </div>

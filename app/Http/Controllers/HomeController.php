@@ -17,11 +17,17 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'home']);
-        //  ta teEml login add dkhol
-        //specifie ->only('home') drr login
-        //specifie ->except(['home']) kolxi khadam b login ela home
-        //
+        $this->middleware('auth')->except(['index', 'home', 'Allproducts']);
+    }
+    public function Allproducts()
+    {
+
+        $All = produit::all();
+        $paramss = $this->Menu();
+        $prod = $paramss[0];
+        $totalPrix = $paramss[1];
+        $count = $paramss[2];
+        return view('components.Allproducts', compact('All', 'prod', 'totalPrix', 'count'));
     }
     public function Menu()
     {
@@ -63,11 +69,9 @@ class HomeController extends Controller
         $prod = $paramss[0];
         $totalPrix = $paramss[1];
         $count = $paramss[2];
-
-        //         
         $productss = produit::paginate(4);
         $categories = categories::all();
-
+        // $All = produit::all();
         return view('products.indexP', compact('productss', 'categories', 'prod', 'totalPrix', 'count'));
     }
 
@@ -198,5 +202,19 @@ class HomeController extends Controller
     {
         $messages = contact::all();
         return $messages;
+    }
+
+    public function search(Request $req)
+    {
+        $paramss = $this->Menu();
+        $prod = $paramss[0];
+        $totalPrix = $paramss[1];
+        $count = $paramss[2];
+
+        $inptname = $req->search;
+        $All = DB::table('produits')
+            ->where('nom', 'LIKE', '%' . $inptname . '%')
+            ->get();
+        return view('components.Allproducts', compact('All', 'prod', 'totalPrix', 'count'));
     }
 }

@@ -22,7 +22,7 @@ class loginController extends Controller
     public function store(Request $req)
     {
         $nom = $req->name;
-        $email = $req->email;
+        $emaile = $req->email;
         $addrs = $req->addrs;
         $phone = $req->phone;
         $img = $req->img;
@@ -33,11 +33,11 @@ class loginController extends Controller
 
 
         // $pas = $req->password;
-        // dd($req);
         $pas = Hash::make($req->password);
+        // dd($req);
         User::create([
             'name' => $nom,
-            'email' => $email,
+            'email' => $emaile,
             'password' => $pas,
             'Adress' => $addrs,
             'Telephone' => $phone,
@@ -73,7 +73,8 @@ class loginController extends Controller
     {
         Session::flush();
         Auth::logout();
-        return redirect()->route('login.show')->with('success', 'deconecte ! ');
+        return redirect()->route('login.show');
+        // ->with('success', 'deconecte ! ');
     }
     // Message
     public function messages()
@@ -105,7 +106,11 @@ class loginController extends Controller
 
         $messages = $this->messages();
         $totalcontact = contact::all()->count();
-        $totalhst = historique::all()->count();
+        $totalhst = DB::table('historiques')
+            ->join('users', 'historiques.idUser', '=', 'users.id')
+            ->where('users.id',  auth()->user()->id)
+            ->count();
+
 
         if (auth()->user()->role === 'ADMIN') {
             return view('login.ProfileDetails', compact('email', 'name', 'image', 'count', 'historiques', 'totalSum', 'messages', 'totalcontact', 'totalhst'));
@@ -114,7 +119,7 @@ class loginController extends Controller
             $prod = $paramss[0];
             $totalPrix = $paramss[1];
             $count2 = $paramss[2];
-            return view('login.UserDetails', compact('email', 'name', 'image', 'count', 'historiques', 'prod', 'totalPrix', 'count2', 'totalhst'));
+            return view('login.UserDetails', compact('email', 'name', 'image', 'count', 'historiques', 'prod', 'totalSum', 'totalPrix', 'count2', 'totalhst'));
         }
     }
 

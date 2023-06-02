@@ -10,7 +10,6 @@
                             placeholder="Recipient's username" aria-label="Recipient's username"
                             aria-describedby="button-addon2">
                         <button class="btn text-white  bg-btnn py-1" id="button-addon2">Add</button>
-                        {{-- <button class="btn btn-outline-dark" ></button> --}}
                     </div>
                 </form>
             </div>
@@ -22,7 +21,6 @@
                         <form action="{{ route('destroyCat', $show->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            {{-- <button class="btn btn-dark">Delete</button> --}}
                             <button class="btn text-white  bg-btnn">Delete</button>
                         </form>
                     </div>

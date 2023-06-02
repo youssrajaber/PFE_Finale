@@ -1,6 +1,7 @@
 <section class="contact  bg-contact py-4" id="contact">
     <div class="container">
-        <h1 class="titre text-center">Contact Us</h1>
+        <h1 data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" class="titre text-center">Contact Us
+        </h1>
         <div class="row mt-4  ">
             <div class="col-md-5">
                 <div class="drapo ">

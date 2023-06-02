@@ -20,7 +20,8 @@ class AdminController extends Controller
         $totalcmd = commande::all()->count();
         $totalcontact = contact::all()->count();
 
-        $totalusers = User::all()->count();
+        $totalusers = User::where('role', 'USER')->count();
+        
         $messages = $this->messages();
         return view('dashboard.dashboard', compact('totalprd', 'totalcmd', 'totalusers', 'messages', 'totalcontact'));
     }

@@ -32,7 +32,8 @@
     <section class="Category container  ">
         <div class="row  ">
             <div class="col">
-                <h1 class="text-center gold-color mb-5">Our Category </h1>
+                <h1 class="text-center gold-color mb-5" data-aos="fade-right" data-aos-offset="300"
+                    data-aos-easing="ease-in-sine">Our Category </h1>
             </div>
         </div>
         <div class="row  mt-3 w-100">
@@ -50,8 +51,10 @@
     </section>
 
     <section class="container">
-        <h1 class="text-center gold-color mb-5" data-aos="fade-right" data-aos-offset="300"
-            data-aos-easing="ease-in-sine">Our Product </h1>
+        <div>
+            <h1 class="text-center gold-color mb-5" data-aos="fade-right" data-aos-offset="300"
+                data-aos-easing="ease-in-sine">Our Product </h1>
+        </div>
         <div class=" d-flex justify-content-center   ">
             <div class="row w-100">
                 @foreach ($productss as $prd)
@@ -61,8 +64,11 @@
                 @endforeach
             </div>
         </div>
-        <div class="d-flex justify-content-center my-2"> {{ $productss->links() }}</div>
+        <div class="d-flex justify-content-center">
+            <div class=" my-2"> {{ $productss->links() }}</div>
+        </div>
     </section>
+
     <x-contactus />
     <section id="map">
         <iframe

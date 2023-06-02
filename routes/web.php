@@ -20,17 +20,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function () {
-    return view('components.nav');
-});
-Route::get('/gogle', function () {
-    return redirect()->away('https://www.google.com');
-})->name('roton');
 
-Route::get('/cat', [PaymentContoller::class, 'generatePDF'])->name('pdf');
+// Route::get('/gogle', function () {
+//     return redirect()->away('https://www.google.com');
+// })->name('roton');
 
 Route::get('/', [HomeController::class, 'index'])->name('products');
 
+//Allproducts
+Route::match(['get', 'post'], '/Allproducts', [HomeController::class, 'Allproducts'])->name('Allproducts');
+
+// Route::get('/Allproducts', [HomeController::class, 'Allproducts'])->name('Allproducts');
+//Search
+Route::post('/search', [HomeController::class, 'search'])->name('search');
+//Pdf
+Route::get('/cat', [PaymentContoller::class, 'generatePDF'])->name('pdf');
 //show More
 Route::get('/products/{id}', [HomeController::class, 'show'])->name('product')->where('id', '\d+');
 // /d+ dicimal (+ 1)
@@ -83,15 +87,12 @@ Route::get('/showCategory/{id}', [HomeController::class, 'showCategory'])->name(
 
 // -------------------------
 // Panier
-
 Route::get('/cart/addCart/{id}', [cartController::class, 'store'])->name('add');
 Route::get('/cart/affish/', [cartController::class, 'affiche'])->name('affichage');
 // Route::get('/cart/Menu/', [HomeController::class, 'Menu'])->name('Menu');
-//
 // Route::get('/panier', [cartController::class, 'panier'])->name('cart');
 
 // Supprimer  panier
-
 Route::delete('/cart/deleteItem/{id}/{quantite}', [cartController::class, 'deleteItem'])->name('deleteItem');
 Route::put('/cart/updateItem/', [cartController::class, 'updateItem'])->name('updateItem');
 //Payment
@@ -103,8 +104,6 @@ Route::post('/payment/info', [PaymentContoller::class, 'payInfos'])->name('payIn
 // Contact Page
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contactPost', [HomeController::class, 'contactPost'])->name('contactPost');
-// search------
-
 
 
 

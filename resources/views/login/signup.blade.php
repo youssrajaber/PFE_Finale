@@ -1,4 +1,3 @@
-
 <x-authLinks>
     <x-Menu />
     <div class="container">
@@ -35,13 +34,12 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" name="phone" class="form-control form-control-user"
+                                        <input type="password" name="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="password" />
                                     </div>
                                     <div class="col-sm-6 ">
                                         <input type="file" name="img" class="form-control form-control-user "
                                             id="exampleRepeatPassword" />
-
                                     </div>
                                 </div>
                                 <button class="btn bg-black fw-bold  btn-user btn-block">Sign up</button>
@@ -49,7 +47,8 @@
                             </form>
                             <hr />
                             <div class="text-center">
-                                <a class="fw-bold black-color" href="{{ Route('login.show') }}">Already have an account? Login!</a>
+                                <a class="fw-bold black-color" href="{{ Route('login.show') }}">Already have an account?
+                                    Login!</a>
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,7 @@
                     <h4 class="white-color  mt-4 text-capitalize"><span class="gold-color">Just with</span> :
                         {{ $product->prix }}DH</h4>
                     <p class="white-color paragraphe mt-5  fw-bold fs-5 grey-color ">{{ $product->Discription }}
-                    
+
                     </p>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -28,13 +28,17 @@
                         @endif
                     </button>
                     @if (Auth::user()->role === 'ADMIN')
-                        <form method="POST">
+                        <form action="{{ route('destroy', $product->id) }}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <a class="btn-update" style="text-decoration: none" href="{{ route('AllPrd') }}"><i
-                                    class="fa-solid fa-pen" style="color: #545454;"></i></a>
-                            <a href="{{ route('destroy', $product->id) }}" class="btn-delete "><i
-                                    class="fa-solid fa-trash ms-2" style="color: #545454;"></i></a>
+                            <a class="btn-update" style="text-decoration: none"
+                                href="{{ route('edit', $product->id) }}"><i class="fa-solid fa-pen"
+                                    style="color: #545454;"></i></a>
+                            <button class="btn-delete text-center">
+                                {{-- <a href="" class=" "> --}}
+                                <i class="fa-solid fa-trash  " style="color: #545454;"></i>
+                                {{-- </a> --}}
+                            </button>
                         </form>
                     @endif
                 </div>
