@@ -12,16 +12,9 @@
 
 </head>
 
-<body class="">
-    {{-- <x-Menu /> --}}
+<body>
+
     <div>
-        {{-- <div class="row mb-3">
-            @if (session()->has('success'))
-                <x-alert type='success'>
-                    {{ session('success') }}
-            @endif
-            </x-alert>
-        </div> --}}
         {{ $slot }}
     </div>
     {{-- Admin scripts --}}

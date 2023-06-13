@@ -26,7 +26,7 @@
     @endif
     <div id="wrapper" class="bg-side">
         <ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-text mx-3 gold-color">ElectroCity </div>
             </a>
             <hr class="sidebar-divider my-0" />
@@ -43,7 +43,7 @@
                 <a class="nav-link" href="{{ route('products') }}">
                     <div class="sb-nav-link-icon">
                         <i class="fa-solid fa-house"></i>
-                        Homepgae
+                        Homepage
                     </div>
                 </a>
             </li>
@@ -75,17 +75,17 @@
 
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('AllOrder') }}">
-                    All Commandes
+                    All Orders
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('AddCat') }}">
-                    Add Category
+                    Category
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('messages') }}">
-                    Messages
+                    All Messages
                 </a>
             </li>
             <li class="nav-item">
@@ -128,7 +128,8 @@
                                             <div class="d-flex">
                                                 <div class="dropdown-list-image mr-3">
                                                     <img class="rounded-circle"
-                                                        src="{{ asset('img/undraw_profile_3.svg') }}" alt="..." />
+                                                        src="{{ asset('img/undraw_profile_3.svg') }}"
+                                                        alt="..." />
                                                     <div class="status-indicator bg-success"></div>
                                                 </div>
                                                 <div class="">
@@ -154,22 +155,22 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small fw-bold">{{ auth()->user()->name }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('images/' . auth()->user()->image) }}" />
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-menu bx-model bg-black dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 {{--  --}}
                                 {{--  --}}
-                                <a class="dropdown-item"
+                                <a class="dropdown-item white-color"
                                     href="{{ route('details', [auth()->user()->email, auth()->user()->name]) }}">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400 "></i>
                                     Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal"
-                                    data-target="#logoutModal">
+                                <a class="dropdown-item white-color" href="{{ route('logout') }}"
+                                    data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -191,21 +192,23 @@
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content bg-black">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title gold-color" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close gold-color" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     Select "Logout" below if you are ready to end your current session.
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                <div class="modal-footer text-center">
+                    <button class="btn bg-btnn" type="button" data-dismiss="modal">
                         Cancel
                     </button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+                    <button class="btn bg-btnn lg ">
+                        <a  class="white-color" href="{{ route('logout') }}">Logout</a>
+                    </button>
                 </div>
             </div>
         </div>

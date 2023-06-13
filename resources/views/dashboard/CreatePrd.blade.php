@@ -29,9 +29,9 @@
                 <div class="form-group">
                     <label for="category_id">Category</label>
                     <select class=" form-control bg-input" name="category">
-                        <option value="">Select a Category</option>
+                        <option value="" class="bg-select">Select a Category</option>
                         @foreach ($showAll as $category)
-                            <option value="{{ $category->id }}">{{ $category->nom }}</option>
+                            <option class="bg-select" value="{{ $category->id }}">{{ $category->nom }}</option>
                         @endforeach
                     </select>
                 </div>

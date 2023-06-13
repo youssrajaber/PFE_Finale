@@ -15,7 +15,8 @@
 
                         <div class="row g-2 my-3">
                             <div class="col-6">
-                                <input type="text" class="form-control" name="nom" value="{{ $name }}">
+                                <input type="text" class="form-control" name="nom"
+                                    value="{{ auth()->user()->name }}">
                             </div>
 
                             <div class="col-6">
@@ -35,7 +36,8 @@
                         </div>
                         <div class="row my-4">
                             <div class="col-12">
-                                <input type="text" name="email" class="form-control" value="{{ $email }}">
+                                <input type="text" name="email" class="form-control"
+                                    value="{{ auth()->user()->email }}">
                             </div>
                         </div>
                         <div class="input-group my-4">

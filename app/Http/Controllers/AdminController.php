@@ -21,7 +21,7 @@ class AdminController extends Controller
         $totalcontact = contact::all()->count();
 
         $totalusers = User::where('role', 'USER')->count();
-        
+
         $messages = $this->messages();
         return view('dashboard.dashboard', compact('totalprd', 'totalcmd', 'totalusers', 'messages', 'totalcontact'));
     }
@@ -53,8 +53,15 @@ class AdminController extends Controller
     public function store(Request $req)
     {
         $nomCat = $req->add;
+        $img = $req->file('image');
+        $extension = $img->getClientOriginalName();
+        $image_name = time() . '_' . $extension;
+        $img->move(public_path('images'), $image_name);
+
+
         categories::create([
             'nom' => $nomCat,
+            'image' => $image_name
         ]);
         return  back();
     }

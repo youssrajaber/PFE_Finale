@@ -106,5 +106,4 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contactPost', [HomeController::class, 'contactPost'])->name('contactPost');
 
 
-
 Auth::routes();

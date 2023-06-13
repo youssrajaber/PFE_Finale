@@ -17,7 +17,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'home', 'Allproducts']);
+        $this->middleware('auth')->except(['index','Allproducts']);
     }
     public function Allproducts()
     {
@@ -60,7 +60,6 @@ class HomeController extends Controller
             $totalPrix = null;
             $count = null;
         }
-        // return view('components.Menu', compact('prod', 'totalPrix', 'count'));
         return [$prod, $totalPrix, $count];
     }
     public function index()

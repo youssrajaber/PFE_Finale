@@ -36,13 +36,15 @@
                     data-aos-easing="ease-in-sine">Our Category </h1>
             </div>
         </div>
-        <div class="row  mt-3 w-100">
+        <div class="row div-cat  mt-3 w-100">
             @foreach ($categories as $categorie)
-                <div class="col-12 col-md-6 col-lg-4 my-2">
+                <div class="col-12 col-md-6 col-lg-4 my-2 text-center">
                     <div class="card">
-                        <div class="card-h2">
+                        <div class="card-img">
+                            <img class="img-fluid " src="{{ asset('images/' . $categorie->image) }}" alt="">
+                        </div>
+                        <div class="card-text fw-bold">
                             <a href="{{ route('showCategory', $categorie->id) }}">{{ $categorie->nom }}</a>
-                            {{-- <img class="img-fluid " src="{{ asset('images/POSTER.png') }}" alt=""> --}}
                         </div>
                     </div>
                 </div>
