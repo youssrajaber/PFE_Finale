@@ -5,7 +5,7 @@
                 class="gold-color fw-bold service text-center"> Services </h1>
         </div>
         <div class="row  cards">
-            <div data-aos="zoom-in-right" class="col-md-4 col-sm-12">
+            <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" class="col-md-4 col-sm-12">
                 <div class="card  mb-3 py-5">
                     <div class="header ">
                         <i class="fa-solid fa-shop fw-bold "></i>
@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <div data-aos="zoom-in" class="col-md-4 col-sm-12">
+            <div data-aos="zoom-in"  class="col-md-4 col-sm-12">
                 <div class="card  mb-3 py-5">
                     <div class="header ">
                         <i class="fa-solid fa-headset fw-bold "></i>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div data-aos="zoom-in-left" class="col-md-4 col-sm-12">
+            <div data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine" class="col-md-4 col-sm-12">
                 <div class="card  mb-3 py-5">
                     <div class="header ">
                         <i class="fa-solid fa-truck gold-color fw-bold "></i>

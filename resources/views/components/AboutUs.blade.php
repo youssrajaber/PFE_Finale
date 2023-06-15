@@ -1,5 +1,5 @@
 <x-Admin_master>
-    <section data-aos="fade-up" data-aos-anchor-placement="center-center" id="about"
+    <section data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="top-bottom" id="about"
         class="About my-5 d-flex flex-column justify-content-center align-items-center">
         <div class="container pt-5">
             <div class="row ">

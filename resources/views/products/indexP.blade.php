@@ -18,7 +18,7 @@
                 </div>
                 <button class="bg-btnn w-50 fw-bold mt-5 mt-lg-0">Buy Now !</button>
             </div>
-            <div data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine"
+            <div data-aos="fade-left" data-aos-offset="400" data-aos-easing="ease-in-sine"
                 class="col-0 col-lg-6 d-none d-lg-flex">
                 <div class="image d-flex justify-content-end">
                     <img class="img-fluid w-75" src="{{ asset('images/Home.png') }}" alt="">
